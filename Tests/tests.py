@@ -3,7 +3,7 @@ from base_test import BaseTests
 
 
 class Tests(BaseTests):
-  
+
     # def test_signup(self):
     #     self.homepage_object.click_login_button()
     #     self.homepage_object.select_new_user()
@@ -42,19 +42,25 @@ class Tests(BaseTests):
         self.homepage_object.complete_mail_for_login()
         self.homepage_object.complete_wrong_pwd_for_login()
         self.homepage_object.click_on_auth_button()
-        time.sleep(1.5)
-        assert current_url_before_signing_in != self.driver.current_url, f'apare asta{self.driver.current_url}'
+        expected_url = 'https://carturesti.ro/site/login'
+        assert current_url_before_signing_in != self.driver.current_url, f'Expected {expected_url} instead of {self.driver.current_url}'
 
     def test_sign_in_wrong_mail(self):
-        current_url_before_signing_in = self.driver.current_url
+        url_before_signing_in = self.driver.current_url
         self.homepage_object.click_login_button()
         self.homepage_object.select_existing_user()
         self.homepage_object.complete_wrong_mail_for_login()
         self.homepage_object.complete_pwd_for_login()
         self.homepage_object.click_on_auth_button()
-        time.sleep(1.5)
-        assert current_url_before_signing_in != self.driver.current_url, f'Apare {current_url_before_signing_in} \
-                                                                in loc de "https://carturesti.ro/site/login" '
+        expected_url = 'https://carturesti.ro/site/login'
+        assert url_before_signing_in != self.driver.current_url, f'Expected{expected_url} instead of {url_before_signing_in}                                                                '
+
+    def test_unavailable_product(self):
+        self.homepage_object.send_text_to_search_bar("bazzzzzzz")
+        initial_url = self.driver.current_url
+        self.homepage_object.submit_search_text()
+        expected_url = 'https://carturesti.ro/product/search/bazzzzzzz'
+        self.homepage_object.check_error_of_missing_product()
 
     def test_sort_price_ascending(self):
         self.homepage_object.send_text_to_search_bar('jordan peterson')
@@ -69,7 +75,6 @@ class Tests(BaseTests):
         self.productspage_object.click_on_sort_button()
         self.productspage_object.sort_price_desc()
         self.productspage_object.check_sort_prices_descending()
-
 
     def test_sort_alfabetic_asc_produse_in_stoc(self):
         self.homepage_object.send_text_to_search_bar('portocala')
@@ -87,14 +92,13 @@ class Tests(BaseTests):
         self.productspage_object.sort_alfabet_desc()
         self.productspage_object.check_sort_alfabetic_descending()
 
-    def test_elements_shown_on_page(self, text_to_check='portocala'):
+    def test_elements_shown_on_page(self, text_to_check='bazz'):
         self.driver.text_to_check = text_to_check
         self.homepage_object.send_text_to_search_bar(text_to_check)
         self.homepage_object.submit_search_text()
         self.productspage_object.click_on_sort_itemsNr_button()
         self.productspage_object.random_sort_of_items_number_on_page()
         self.productspage_object.check_items_number_on_page()
-
 
     def test_correct_items_number_in_cart(self):
         self.homepage_object.login_procedure()
@@ -111,3 +115,14 @@ class Tests(BaseTests):
         self.homepage_object.submit_search_text()
         self.productspage_object.sort_in_stoc_items()
         self.productspage_object.check_disponibility_sort_buttons()
+
+
+    def test_relevance_products_received_by_author(self):#relevant means over 50% with correct authors
+        self.homepage_object.send_text_to_search_bar('jordan b. peterson')
+        self.homepage_object.submit_search_text()
+        self.productspage_object.check_author_relevance_products_received('jordan b. peterson')
+
+    def test_relevance_products_received_by_name(self):#relevant means over 50% with correct names
+        self.homepage_object.send_text_to_search_bar('portocala')
+        self.homepage_object.submit_search_text()
+        self.productspage_object.check_name_relevance_products_received('portocala')

@@ -48,7 +48,7 @@ class HomePage(BasePage):
     def click_on_auth_button(self):
         button = self.wait_for_clickable_element(HomePageLocators.BTN_AUTH)
         button.click()
-
+        time.sleep(1)
 
     def check_sign_up_succesfully(self):
         msg_to_check = self.wait_for_clickable_element(HomePageLocators.SIGNUP_SUCCESS_MSG)
@@ -61,12 +61,12 @@ class HomePage(BasePage):
 
 
     def check_signing_in_succesfully(self):
-        acc_new_btn = self.wait_for_clickable_element(HomePageLocators.BTN_CONT_SALUT)
-        assert acc_new_btn.is_displayed(), "Nu apare butonul 'contul tau'"
+        acc_new_btn = self.driver.find_element(*HomePageLocators.BTN_CONT_SALUT)
+        assert acc_new_btn.is_displayed(), "Button 'CONTUL TAU' doesn`t show up"
 
     def check_wrong_pwd_mail_mssg(self):
-        msg_pwd_fail_check = self.wait_for_clickable_element(HomePageLocators.BTN_AUTH)
-        assert msg_pwd_fail_check.is_displayed(), "Nu mai esti pe login form"
+        msg_pwd_fail_check = self.wait_for_displayed_element(HomePageLocators.BTN_AUTH)
+        assert msg_pwd_fail_check.is_displayed(), "You are not on login form"
 
     def send_text_to_search_bar(self,text_to_search):
         time.sleep(1)
@@ -83,3 +83,7 @@ class HomePage(BasePage):
         self.complete_mail_for_login()
         self.complete_pwd_for_login()
         self.click_on_auth_button()
+
+    def check_error_of_missing_product(self):
+        mssg_to_check = self.driver.find_element(*HomePageLocators.MESSAGE_ERROR_PRODUCT_NOT_FOUND)
+        assert mssg_to_check.is_displayed(), 'Error message of missing items doesn`t exist'

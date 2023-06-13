@@ -61,16 +61,16 @@ class ProductsPage(BasePage):
         item_chosen_randomly()
 
     def check_sort_prices_ascending(self):
-        time.sleep(2)
+        time.sleep(1)
         self.preturi_asc = []
         for pret in self.driver.find_elements(*ProductsPageLocators.PRETURI_PRODUSE):
             self.preturi_asc.append(int(float(pret.text)))
         self.preturi_asc_check = all(
             self.preturi_asc[i] <= self.preturi_asc[i + 1] for i in range(len(self.preturi_asc) - 1))
-        assert self.preturi_asc_check == True, 'Preturi sortate ascendent gresit'
+        assert self.preturi_asc_check == True, 'Prices ascending order wrong sorted.'
 
     def check_sort_prices_descending(self):
-        time.sleep(2)
+        time.sleep(1)
         self.preturi_desc = []
         for pret in self.driver.find_elements(*ProductsPageLocators.PRETURI_PRODUSE):
             self.preturi_desc.append(int(float(pret.text)))
@@ -83,27 +83,27 @@ class ProductsPage(BasePage):
         for nume in self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE):
             self.nume_produse.append(nume.text)
         sorted_names = sorted(self.nume_produse)
-        assert sorted_names == self.nume_produse, 'Sortarea dupa nume (asc) nu este corespunzatoare'
+        assert sorted_names == self.nume_produse, 'Sorting after name (asc) is not correct.'
 
     def check_sort_alfabetic_descending(self):
         self.nume_produse = []
         for nume in self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE):
             self.nume_produse.append(nume.text)
         sorted_names = sorted(self.nume_produse, reverse=True)
-        assert sorted_names == self.nume_produse, 'Sortarea dupa nume (desc) nu este corespunzatoare'
+        assert sorted_names == self.nume_produse, 'Sorting after name (desc) is not correct.'
 
     def sort_in_stoc_items(self):
         time.sleep(1)
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_IN_STOC)
         button.click()
+        time.sleep(1)
 
     def check_items_number_on_page(self):
         lista_produse = []
         for produs in self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE):
             self.nume_produse.append(produs)
         text_for_check = self.driver.find_element(*ProductsPageLocators.TEXT_NUMBER_ITEMS_ON_PAGE).text
-        assert len(lista_produse) <= int(text_for_check), 'Numarul de obiecte afisat este mai mare decat varianta ' \
-                                                          'dorita '
+        assert len(lista_produse) <= int(text_for_check), 'Number of objects on the page is bigger then selected'
 
     def add_book_JP(self):
         button = self.wait_for_clickable_element(ProductsPageLocators.CARTEA_1)
@@ -125,12 +125,11 @@ class ProductsPage(BasePage):
         self.click_on_cart_button()
         number_on_cart = self.wait_for_displayed_element(HomePageLocators.CART_ITEMS_NUMBER).text
         items_added = []
-        time.sleep(1)
         number_of_items_added = self.driver.find_elements(*ProductsPageLocators.NUMAR_PRODUSE_ADAUGATE_IN_COS)
         for item in number_of_items_added:
             items_added.append(int(item.text))
         sum_items = sum(items_added)
-        assert int(number_on_cart) == int(sum_items), 'Numarul obiectelor adaugate nu coincide cu numarul de pe cart'
+        assert int(number_on_cart) == int(sum_items), 'The number of added objects is not the same with the one from cart icon'
 
 
 
@@ -144,7 +143,7 @@ class ProductsPage(BasePage):
         IN_STOC_BTN = self.driver.find_element(By.XPATH,'//*[@id="coloana-filtre"]/filter-form/div/form/div[1]/div/md-checkbox[2]')
         BUTON_ACTIVAT_STATUS = IN_STOC_BTN.get_attribute('aria-checked')
         try:
-            assert BUTON_ACTIVAT_STATUS == "false", 'Butonul "In stoc" este activat'
+            assert BUTON_ACTIVAT_STATUS == "false", 'Button "In stoc" is activ'
         except AssertionError as error:
             print(error)
         return BUTON_ACTIVAT_STATUS
@@ -152,7 +151,7 @@ class ProductsPage(BasePage):
         STOC_LIMITAT_BTN = self.driver.find_element(By.XPATH,'//*[@id="coloana-filtre"]/filter-form/div/form/div[1]/div/md-checkbox[3]')
         BUTON_ACTIVAT_STATUS = STOC_LIMITAT_BTN.get_attribute('aria-checked')
         try:
-            assert BUTON_ACTIVAT_STATUS == "false", 'Butonul "Stoc-limitat" este activat.'
+            assert BUTON_ACTIVAT_STATUS == "false", 'Button "Stoc-limitat" is activ.'
         except AssertionError as error:
             print(error)
         return BUTON_ACTIVAT_STATUS
@@ -161,22 +160,49 @@ class ProductsPage(BasePage):
                                                    '//*[@id="coloana-filtre"]/filter-form/div/form/div[1]/div/md-checkbox[1]')
         BUTON_ACTIVAT_STATUS = LIVRARE_24H_BTN.get_attribute('aria-checked')
         try:
-            assert BUTON_ACTIVAT_STATUS == "false", 'Butonul "Livrare 24h" este activat'
+            assert BUTON_ACTIVAT_STATUS == "false", 'Button "Livrare 24h" is activ'
         except AssertionError as error:
             print(error)
         return BUTON_ACTIVAT_STATUS
 
     def check_disponibility_sort_buttons(self):
-        time.sleep(1)
-        # self.check_if_in_stoc_btn_is_active()
-        # self.check_if_stoc_limitat_btn_is_active()
-        # self.check_if_livrare_24h_btn_is_active()
         butoane_active = []
         butoane_active.append(self.check_if_in_stoc_btn_is_active())
         butoane_active.append(self.check_if_stoc_limitat_btn_is_active())
         butoane_active.append(self.check_if_livrare_24h_btn_is_active())
         butoane_active_count = butoane_active.count('true')
-        # try:
-        assert butoane_active_count == 3, f"Sunt active {butoane_active_count} butoane din 3."
-        # except:
-        #     pass
+        assert butoane_active_count == 3, f"Expected 1 button active but {butoane_active_count} are active."
+
+    def check_author_relevance_products_received(self, text):
+        time.sleep(1)
+        objects_with_author = []
+        web_authors = self.driver.find_elements(*ProductsPageLocators.AUTORI_PRODUSE)
+        for autor in web_authors:
+            objects_with_author.append(autor.text.lower())
+
+        nr_produse_conform_textului = 0
+        for product in objects_with_author:
+             if text in product:
+                 nr_produse_conform_textului += 1
+             else:
+                 pass
+
+        percentage = (nr_produse_conform_textului / len(objects_with_author) ) * 100
+        assert percentage > 50, "Under 50% of products showed have other auhtor name."
+
+    def check_name_relevance_products_received(self, text):
+        time.sleep(1)
+        objects_with_name = []
+        web_names_products = self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE)
+        for name in web_names_products:
+            objects_with_name.append(name.text.lower())
+
+        nr_produse_conform_textului = 0
+        for product in objects_with_name:
+            if text in product:
+                nr_produse_conform_textului += 1
+            else:
+                pass
+
+        percentage = (nr_produse_conform_textului / len(objects_with_name)) * 100
+        assert percentage > 50, "Under 50% of products showed have no text similarity in title/name."

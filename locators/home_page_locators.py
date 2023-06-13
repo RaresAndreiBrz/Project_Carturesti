@@ -50,3 +50,4 @@ class HomePageLocators:
     BTN_CARTURESTI_LIBRARII = (
     By.CLASS_NAME, "/html/body/div[2]/div[1]/div/div[2]/md-menu-bar[2]/md-menu-item[1]/ul/li[2]/a")
     BTN_PRODUSE = (By.ID, "buton-produse")
+    MESSAGE_ERROR_PRODUCT_NOT_FOUND = (By.XPATH, '//*[@id="search-category"]')

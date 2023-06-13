@@ -4,8 +4,8 @@ from selenium.webdriver.common.by import By
 class ProductsPageLocators:
     # general locators
     PRETURI_PRODUSE = (By.CLASS_NAME, "suma")
-    NUME_PRODUSE = (By.CLASS_NAME, "md-title ng-binding")
-    AUTORI_PRODUSE = (By.CLASS_NAME, "subtitlu-produs ng-binding")
+    NUME_PRODUSE = (By.XPATH, '//*[@class="md-title ng-binding"]')
+    AUTORI_PRODUSE = (By.XPATH, '//*[@class ="subtitlu-produs ng-binding"]')
 
     # sorting locators
     BTN_SORT1 = (By.XPATH,
