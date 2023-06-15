@@ -35,3 +35,7 @@ class ProductsPageLocators:
     CARTEA_1 = (By.XPATH, '//*[@content="/carte/12-rules-for-life-302799900?p=2"]')
     # cartea_1 pentru verificarea numarului de obiecte in cos
     CARTEA_2 = (By.XPATH, '//*[@content="/carte/dincolo-de-ordine-1037305993?p=3"]')
+
+    PRICES_IN_CART = (By.XPATH, '//*[@data-ng-bind="numberFormat(p.price)"]')
+    FINAL_PRICE = (By.XPATH, '// *[ @data-ng-bind = "numberFormat(cart.total)"]')
+    TO_CHECKOUT_BTN = (By.XPATH, '//*[@class="md-raised alt butonFinalizare md-button ng-scope md-ink-ripple"]')

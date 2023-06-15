@@ -76,6 +76,7 @@ class HomePage(BasePage):
     def submit_search_text(self):
         search_bar = self.wait_for_clickable_element(HomePageLocators.BTN_SEARCH_LOOP)
         search_bar.click()
+        time.sleep(1)
 
     def login_procedure(self):
         self.click_login_button()

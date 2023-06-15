@@ -121,6 +121,7 @@ class ProductsPage(BasePage):
         cart_btn = self.wait_for_clickable_element(HomePageLocators.BTN_CART)
         cart_btn.click()
 
+
     def check_items_number_on_cart(self):
         self.click_on_cart_button()
         number_on_cart = self.wait_for_displayed_element(HomePageLocators.CART_ITEMS_NUMBER).text
@@ -206,3 +207,35 @@ class ProductsPage(BasePage):
 
         percentage = (nr_produse_conform_textului / len(objects_with_name)) * 100
         assert percentage > 50, "Under 50% of products showed have no text similarity in title/name."
+
+    def click_on_first_item(self):
+        time.sleep(0.5)
+        items_on_page = self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE)
+        item_to_add = items_on_page[0]
+        item_to_add.click()
+
+    def click_on_second_item(self):
+        time.sleep(1)
+        items_on_page = self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE)
+        item_to_add = items_on_page[1]
+        item_to_add.click()
+    def click_remove_in_cart(self):
+        self.driver.find_element(*HomePageLocators.BTN_REMOVE_FIRST_ITEM).click()
+        time.sleep(1)
+
+    def check_price_in_cart(self):
+        time.sleep(0.5)
+        preturi_in_cart = []
+        prices_elements = self.driver.find_elements(*ProductsPageLocators.PRICES_IN_CART)
+        for price in prices_elements:
+            preturi_in_cart.append(price.text)
+        suma_preturi = 0
+        for pret in preturi_in_cart:
+            suma_preturi += float(pret.replace(',', '.'))
+        final_price_in_cart = self.driver.find_element(*ProductsPageLocators.FINAL_PRICE).text
+        final_price_in_cart_float = float(final_price_in_cart.replace(',', '.'))
+        assert float(suma_preturi) == final_price_in_cart_float, "Price wrongly displayed"
+
+    def go_to_checkout_page(self):
+        btn_for_checkout = self.wait_for_clickable_element(ProductsPageLocators.TO_CHECKOUT_BTN)
+        btn_for_checkout.click()

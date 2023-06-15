@@ -30,7 +30,7 @@ class HomePageLocators:
     BTN_SEARCH_LOOP = (By.XPATH, "/html/body/div[2]/div[1]/div/div[1]/div[2]/i")
     CART_ITEMS_NUMBER = (By.XPATH, '//*[@data-ng-bind="cart.count()"]')
     BTN_CART = (By.CLASS_NAME, "checkout__button")
-
+    BTN_REMOVE_FIRST_ITEM = (By.XPATH, "//tr[1]/td[3]/a/i")
     BTN_CONT_SALUT = (By.XPATH, '//*[@id="accountDropdown"]')
     BTN_CONT_CONTU_TAU = (By.PARTIAL_LINK_TEXT, "CONTUL")
     BTN_CONT_MODIF_PWD = (By.PARTIAL_LINK_TEXT, "MODIFICARE")

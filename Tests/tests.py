@@ -126,3 +126,53 @@ class Tests(BaseTests):
         self.homepage_object.send_text_to_search_bar('portocala')
         self.homepage_object.submit_search_text()
         self.productspage_object.check_name_relevance_products_received('portocala')
+
+    def test_limit_number_of_items_in_cart(self): # 10 is the limit of products in cart
+        self.homepage_object.login_procedure()
+        self.homepage_object.send_text_to_search_bar('NAPOLEON')
+        self.homepage_object.submit_search_text()
+        self.productspage_object.click_on_first_item()
+        self.itempage_object.multiply_clicks_on_add(11)
+        self.productspage_object.check_items_number_on_cart()
+
+    def test_in_cart_removal_items(self):
+        self.homepage_object.login_procedure()
+        self.homepage_object.send_text_to_search_bar('NAPOLEON')
+        self.homepage_object.submit_search_text()
+        self.productspage_object.click_on_first_item()
+        self.itempage_object.multiply_clicks_on_add(1)
+        self.driver.back()
+        self.productspage_object.click_on_second_item()
+        self.itempage_object.multiply_clicks_on_add(2)
+        self.productspage_object.click_on_cart_button()
+        self.productspage_object.click_remove_in_cart()
+        self.productspage_object.check_items_number_on_cart()
+
+    def test_final_price_displayed_in_cart_button(self):
+        self.homepage_object.send_text_to_search_bar('NAPOLEON')
+        self.homepage_object.submit_search_text()
+        self.productspage_object.click_on_first_item()
+        self.itempage_object.multiply_clicks_on_add(1)
+        self.driver.back()
+        self.productspage_object.click_on_second_item()
+        self.itempage_object.multiply_clicks_on_add(2)
+        self.productspage_object.click_on_cart_button()
+        self.productspage_object.check_price_in_cart()
+
+    def test_remove_button_from_checkout_page(self):
+        self.homepage_object.login_procedure()
+        self.homepage_object.send_text_to_search_bar("matematica")
+        self.homepage_object.submit_search_text()
+        self.productspage_object.click_on_first_item()
+        self.itempage_object.multiply_clicks_on_add(3)
+        self.itempage_object.back()
+        self.productspage_object.click_on_second_item()
+        self.itempage_object.multiply_clicks_on_add(1)
+        self.productspage_object.click_on_cart_button()
+        self.productspage_object.go_to_checkout_page()
+        self.checkoutpage_object.check_amount_to_pay_for_all_products()
+        self.checkoutpage_object.random_remove()
+        self.checkoutpage_object.check_amount_to_pay_for_all_products()
+
+
+    # def test_buy_item(self):
