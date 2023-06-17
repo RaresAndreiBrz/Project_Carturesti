@@ -14,12 +14,12 @@ class CheckoutPage(BasePage):
         full_price_to_pay = 0
         for item in list_prices:
             full_price_to_pay += float(item.text.replace(',','.').replace('RON', ''))
-        assert full_price_to_pay == total_on_cart, "Suma totală este incorectă"
+        assert full_price_to_pay == total_on_cart, "Wrong amount to pay!"
 
-    def go_to_date_de_livrare(self):
-        self.driver.find_elements(*CheckoutPageLocators.DATE_DE_LIVRARE_BTN).click()
+    def go_to_delivery_page(self):
+        self.driver.find_element(*CheckoutPageLocators.GO_TO_DELIVERY_PAGE_BTN).click()
 
     def random_remove(self):
-        remove_buttons = self.driver.find_elements(*CheckoutPageLocators.REMOVE_BUTTONS)
+        remove_buttons = self.driver.find_elements(*CheckoutPageLocators.REMOVE_PRODUCTS_BUTTONS)
         random_choice = random.choice(remove_buttons)
         random_choice.click()

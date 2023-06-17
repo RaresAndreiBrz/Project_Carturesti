@@ -17,11 +17,11 @@ class ProductsPage(BasePage):
         button.click()
 
     def sort_price_asc(self):
-        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_PRET_ASC)
+        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_PRICE_ASC)
         button.click()
 
     def sort_price_desc(self):
-        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_PRET_DESC)
+        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_PRICE_DESC)
         button.click()
 
     def sort_alfabet_asc(self):
@@ -34,25 +34,27 @@ class ProductsPage(BasePage):
     def sort_discount_asc(self):
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_DISCOUNT_ASC)
         button.click()
+        time.sleep(1)
 
     def sort_discount_desc(self):
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_DISCOUNT_DESC)
         button.click()
+        time.sleep(1)
 
     def click_on_sort_itemsNr_button(self):
-        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT2)
+        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT2_PRODUCT_TO_DISPLAY)
         button.click()
 
     def select_30_items_onPage(self):
-        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_30_ITEMS)
+        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_30_PRODUCTS_TO_DISPLAY)
         button.click()
 
     def select_60_items_onPage(self):
-        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_60_ITEMS)
+        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_60_PRODUCTS_TO_DISPLAY)
         button.click()
 
     def select_90_items_onPage(self):
-        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_90_ITEMS)
+        button = self.wait_for_clickable_element(ProductsPageLocators.BTN_90_PRODUCTS_TO_DISPLAY)
         button.click()
 
     def random_sort_of_items_number_on_page(self):
@@ -63,7 +65,7 @@ class ProductsPage(BasePage):
     def check_sort_prices_ascending(self):
         time.sleep(1)
         self.preturi_asc = []
-        for pret in self.driver.find_elements(*ProductsPageLocators.PRETURI_PRODUSE):
+        for pret in self.driver.find_elements(*ProductsPageLocators.PRODUCTS_PRICES):
             self.preturi_asc.append(int(float(pret.text)))
         self.preturi_asc_check = all(
             self.preturi_asc[i] <= self.preturi_asc[i + 1] for i in range(len(self.preturi_asc) - 1))
@@ -72,7 +74,7 @@ class ProductsPage(BasePage):
     def check_sort_prices_descending(self):
         time.sleep(1)
         self.preturi_desc = []
-        for pret in self.driver.find_elements(*ProductsPageLocators.PRETURI_PRODUSE):
+        for pret in self.driver.find_elements(*ProductsPageLocators.PRODUCTS_PRICES):
             self.preturi_desc.append(int(float(pret.text)))
         self.preturi_desc_check = all(
             self.preturi_desc[i] >= self.preturi_desc[i + 1] for i in range(len(self.preturi_desc) - 1))
@@ -80,17 +82,33 @@ class ProductsPage(BasePage):
 
     def check_sort_alfabetic_ascending(self):
         self.nume_produse = []
-        for nume in self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE):
+        for nume in self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES):
             self.nume_produse.append(nume.text)
         sorted_names = sorted(self.nume_produse)
         assert sorted_names == self.nume_produse, 'Sorting after name (asc) is not correct.'
 
     def check_sort_alfabetic_descending(self):
         self.nume_produse = []
-        for nume in self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE):
+        for nume in self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES):
             self.nume_produse.append(nume.text)
         sorted_names = sorted(self.nume_produse, reverse=True)
         assert sorted_names == self.nume_produse, 'Sorting after name (desc) is not correct.'
+
+    def check_sort_discount_desc(self):
+        self.products_with_discount = self.driver.find_elements(*ProductsPageLocators.DISCOUNT_PRODUCTS)
+        self.discount_list_products= []
+        for item in self.products_with_discount:
+            self.discount_list_products.append(item.text)
+        self.discount_list_products_int = [int(x.strip('%')) for x in self.discount_list_products]
+        assert self.discount_list_products_int == sorted(self.discount_list_products_int, reverse=True)
+
+    def check_sort_discount_asc(self):
+        self.products_with_discount = self.driver.find_elements(*ProductsPageLocators.DISCOUNT_PRODUCTS)
+        self.discount_list_products= []
+        for item in self.products_with_discount:
+            self.discount_list_products.append(item.text)
+        self.discount_list_products_int = [int(x.strip('%')) for x in self.discount_list_products]
+        assert self.discount_list_products_int == sorted(self.discount_list_products_int)
 
     def sort_in_stoc_items(self):
         time.sleep(1)
@@ -100,21 +118,21 @@ class ProductsPage(BasePage):
 
     def check_items_number_on_page(self):
         lista_produse = []
-        for produs in self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE):
+        for produs in self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES):
             self.nume_produse.append(produs)
-        text_for_check = self.driver.find_element(*ProductsPageLocators.TEXT_NUMBER_ITEMS_ON_PAGE).text
+        text_for_check = self.driver.find_element(*ProductsPageLocators.TEXT_NUMBER_OF_PRODUCTS_ON_PAGE).text
         assert len(lista_produse) <= int(text_for_check), 'Number of objects on the page is bigger then selected'
 
-    def add_book_JP(self):
-        button = self.wait_for_clickable_element(ProductsPageLocators.CARTEA_1)
+    def add_book_1(self):
+        button = self.wait_for_clickable_element(ProductsPageLocators.BOOK_1)
         button.click()
-        add = self.wait_for_clickable_element(ItemPageLocators.BTN_ADD_PRODUS)
+        add = self.wait_for_clickable_element(ItemPageLocators.BTN_ADD_PRODUCT_IN_CART)
         add.click()
 
-    def add_book_JP_2(self):
-        button = self.wait_for_clickable_element(ProductsPageLocators.CARTEA_2)
+    def add_book_2(self):
+        button = self.wait_for_clickable_element(ProductsPageLocators.BOOK_2)
         button.click()
-        add = self.wait_for_clickable_element(ItemPageLocators.BTN_ADD_PRODUS)
+        add = self.wait_for_clickable_element(ItemPageLocators.BTN_ADD_PRODUCT_IN_CART)
         add.click()
 
     def click_on_cart_button(self):
@@ -124,9 +142,9 @@ class ProductsPage(BasePage):
 
     def check_items_number_on_cart(self):
         self.click_on_cart_button()
-        number_on_cart = self.wait_for_displayed_element(HomePageLocators.CART_ITEMS_NUMBER).text
+        number_on_cart = self.wait_for_displayed_element(HomePageLocators.CART_PRODUCTS_NUMBER).text
         items_added = []
-        number_of_items_added = self.driver.find_elements(*ProductsPageLocators.NUMAR_PRODUSE_ADAUGATE_IN_COS)
+        number_of_items_added = self.driver.find_elements(*ProductsPageLocators.NUMBER_OF_PRODUCTS_IN_THE_CART)
         for item in number_of_items_added:
             items_added.append(int(item.text))
         sum_items = sum(items_added)
@@ -177,7 +195,7 @@ class ProductsPage(BasePage):
     def check_author_relevance_products_received(self, text):
         time.sleep(1)
         objects_with_author = []
-        web_authors = self.driver.find_elements(*ProductsPageLocators.AUTORI_PRODUSE)
+        web_authors = self.driver.find_elements(*ProductsPageLocators.PRODUCTS_AUTHORS)
         for autor in web_authors:
             objects_with_author.append(autor.text.lower())
 
@@ -194,7 +212,7 @@ class ProductsPage(BasePage):
     def check_name_relevance_products_received(self, text):
         time.sleep(1)
         objects_with_name = []
-        web_names_products = self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE)
+        web_names_products = self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES)
         for name in web_names_products:
             objects_with_name.append(name.text.lower())
 
@@ -210,17 +228,17 @@ class ProductsPage(BasePage):
 
     def click_on_first_item(self):
         time.sleep(0.5)
-        items_on_page = self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE)
-        item_to_add = items_on_page[0]
+        items_on_page = self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES)
+        item_to_add = items_on_page[1]
         item_to_add.click()
 
     def click_on_second_item(self):
         time.sleep(1)
-        items_on_page = self.driver.find_elements(*ProductsPageLocators.NUME_PRODUSE)
+        items_on_page = self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES)
         item_to_add = items_on_page[1]
         item_to_add.click()
     def click_remove_in_cart(self):
-        self.driver.find_element(*HomePageLocators.BTN_REMOVE_FIRST_ITEM).click()
+        self.driver.find_element(*HomePageLocators.BTN_REMOVE_FIRST_PRODUCT).click()
         time.sleep(1)
 
     def check_price_in_cart(self):
@@ -237,5 +255,6 @@ class ProductsPage(BasePage):
         assert float(suma_preturi) == final_price_in_cart_float, "Price wrongly displayed"
 
     def go_to_checkout_page(self):
-        btn_for_checkout = self.wait_for_clickable_element(ProductsPageLocators.TO_CHECKOUT_BTN)
+        btn_for_checkout = self.wait_for_clickable_element(ProductsPageLocators.BTN_GO_TO_CHECKOUT)
         btn_for_checkout.click()
+        time.sleep(1)

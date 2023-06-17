@@ -11,6 +11,8 @@ class HomePage(BasePage):
         button = self.wait_for_clickable_element(HomePageLocators.BTN_LOGIN)
         button.click()
 
+    def cancel_cookie(self):
+        self.driver.find_element(*HomePageLocators.CANCEL_COOKIE_BTN).click()
     def complete_mail_for_login(self):
         button = self.wait_for_clickable_element(HomePageLocators.SIGN_IN_EMAIL_INPUT)
         button.send_keys("andrei.rares.brz@gmail.com")
@@ -88,3 +90,9 @@ class HomePage(BasePage):
     def check_error_of_missing_product(self):
         mssg_to_check = self.driver.find_element(*HomePageLocators.MESSAGE_ERROR_PRODUCT_NOT_FOUND)
         assert mssg_to_check.is_displayed(), 'Error message of missing items doesn`t exist'
+
+    def click_on_my_account_btn(self):
+        self.driver.find_element(*HomePageLocators.BTN_CONT_SALUT).click()
+
+    def click_on_wishlist_btn(self):
+        self.driver.find_element(*HomePageLocators.BTN_CONT_WISHLIST).click()

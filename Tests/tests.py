@@ -55,6 +55,51 @@ class Tests(BaseTests):
         expected_url = 'https://carturesti.ro/site/login'
         assert url_before_signing_in != self.driver.current_url, f'Expected{expected_url} instead of {url_before_signing_in}                                                                '
 
+    def test_second_loginPage_wrongMAIL_wrongPWD(self):
+        self.homepage_object.click_login_button()
+        self.homepage_object.select_existing_user()
+        self.homepage_object.complete_mail_for_login()
+        self.homepage_object.complete_wrong_pwd_for_login()
+        self.homepage_object.click_on_auth_button()
+        this_url = self.driver.current_url
+        self.loginsecondpage_object.send_wrong_mail_wrong_pwd()
+        self.loginsecondpage_object.click_on_auth_btn()
+        assert this_url == self.driver.current_url, f"Url changed. Expected {this_url} and got {self.driver.current_url}"
+
+    def test_second_loginPage_wrongMAIL_correctPWD(self):
+        self.homepage_object.click_login_button()
+        self.homepage_object.select_existing_user()
+        self.homepage_object.complete_mail_for_login()
+        self.homepage_object.complete_wrong_pwd_for_login()
+        self.homepage_object.click_on_auth_button()
+        this_url = self.driver.current_url
+        self.loginsecondpage_object.send_wrong_mail_correct_pwd()
+        self.loginsecondpage_object.click_on_auth_btn()
+        assert this_url == self.driver.current_url, f"Url changed. Expected {this_url} and got {self.driver.current_url}"
+
+    def test_second_loginPage_correctMAIL_wrongPWD(self):
+        self.homepage_object.click_login_button()
+        self.homepage_object.select_existing_user()
+        self.homepage_object.complete_mail_for_login()
+        self.homepage_object.complete_wrong_pwd_for_login()
+        self.homepage_object.click_on_auth_button()
+        this_url = self.driver.current_url
+        self.loginsecondpage_object.send_correct_mail_wrong_pwd()
+        self.loginsecondpage_object.click_on_auth_btn()
+        assert this_url == self.driver.current_url, f"Url changed. Expected {this_url} and got {self.driver.current_url}"
+
+    def test_second_loginPage_correctMAIL_correctPWD(self):
+        self.homepage_object.click_login_button()
+        self.homepage_object.select_existing_user()
+        self.homepage_object.complete_mail_for_login()
+        self.homepage_object.complete_wrong_pwd_for_login()
+        self.homepage_object.click_on_auth_button()
+        this_url = self.driver.current_url
+        self.loginsecondpage_object.send_correct_mail_correct_pwd()
+        self.loginsecondpage_object.click_on_auth_btn()
+        time.sleep(3)
+        assert this_url != self.driver.current_url, f"Url changed. Expected 'https://carturesti.ro/' and got {self.driver.current_url}"
+
     def test_unavailable_product(self):
         self.homepage_object.send_text_to_search_bar("bazzzzzzz")
         initial_url = self.driver.current_url
@@ -92,6 +137,22 @@ class Tests(BaseTests):
         self.productspage_object.sort_alfabet_desc()
         self.productspage_object.check_sort_alfabetic_descending()
 
+    def test_sort_discount_desc(self):
+        self.homepage_object.send_text_to_search_bar('matematica')
+        self.homepage_object.submit_search_text()
+        self.productspage_object.click_on_sort_button()
+        self.productspage_object.sort_discount_desc()
+        self.productspage_object.check_sort_discount_desc()
+
+
+    def test_sort_discount_asc_produse(self):
+        self.homepage_object.send_text_to_search_bar('matematica')
+        self.homepage_object.submit_search_text()
+        self.productspage_object.click_on_sort_button()
+        self.productspage_object.sort_discount_asc()
+        self.productspage_object.check_sort_discount_asc()
+
+
     def test_elements_shown_on_page(self, text_to_check='bazz'):
         self.driver.text_to_check = text_to_check
         self.homepage_object.send_text_to_search_bar(text_to_check)
@@ -116,18 +177,17 @@ class Tests(BaseTests):
         self.productspage_object.sort_in_stoc_items()
         self.productspage_object.check_disponibility_sort_buttons()
 
-
-    def test_relevance_products_received_by_author(self):#relevant means over 50% with correct authors
+    def test_relevance_products_received_by_author(self):  # relevant means over 50% with correct authors
         self.homepage_object.send_text_to_search_bar('jordan b. peterson')
         self.homepage_object.submit_search_text()
         self.productspage_object.check_author_relevance_products_received('jordan b. peterson')
 
-    def test_relevance_products_received_by_name(self):#relevant means over 50% with correct names
+    def test_relevance_products_received_by_name(self):  # relevant means over 50% with correct names
         self.homepage_object.send_text_to_search_bar('portocala')
         self.homepage_object.submit_search_text()
         self.productspage_object.check_name_relevance_products_received('portocala')
 
-    def test_limit_number_of_items_in_cart(self): # 10 is the limit of products in cart
+    def test_limit_number_of_items_in_cart(self):  # 10 is the limit of products in cart
         self.homepage_object.login_procedure()
         self.homepage_object.send_text_to_search_bar('NAPOLEON')
         self.homepage_object.submit_search_text()
@@ -159,6 +219,24 @@ class Tests(BaseTests):
         self.productspage_object.click_on_cart_button()
         self.productspage_object.check_price_in_cart()
 
+    def test_details_displayed_on_item_page(self):
+        self.homepage_object.send_text_to_search_bar("george")
+        self.homepage_object.submit_search_text()
+        self.productspage_object.click_on_first_item()
+        self.itempage_object.check_details_displayed_box()
+
+    def test_add_product_to_wishlist(self):
+        self.homepage_object.login_procedure()
+        self.homepage_object.send_text_to_search_bar("albastru")
+        self.homepage_object.submit_search_text()
+        self.homepage_object.cancel_cookie()
+        self.productspage_object.click_on_first_item()
+        self.itempage_object.add_product_to_wishlist()
+        self.homepage_object.click_on_my_account_btn()
+        self.homepage_object.click_on_wishlist_btn()
+        self.wishlistpage_object.create_new_wishlist("wishlist1")
+        self.wishlistpage_object.check_presence_of_products_in_wishlist()
+
     def test_remove_button_from_checkout_page(self):
         self.homepage_object.login_procedure()
         self.homepage_object.send_text_to_search_bar("matematica")
@@ -174,5 +252,38 @@ class Tests(BaseTests):
         self.checkoutpage_object.random_remove()
         self.checkoutpage_object.check_amount_to_pay_for_all_products()
 
+    def test_wrong_info_delivery_inputs1(self):
+        self.homepage_object.login_procedure()
+        self.homepage_object.send_text_to_search_bar("matematica")
+        self.homepage_object.submit_search_text()
+        self.productspage_object.click_on_first_item()
+        self.itempage_object.multiply_clicks_on_add(2)
+        self.productspage_object.click_on_cart_button()
+        self.productspage_object.go_to_checkout_page()
+        self.homepage_object.cancel_cookie()
+        self.checkoutpage_object.go_to_delivery_page()
+        self.deliverypage_object.click_on_persoana_fizica()
+        self.deliverypage_object.send_wrong_inputs()
+        time.sleep(2)
+        self.deliverypage_object.erorr_inputs_messages()
 
-    # def test_buy_item(self):
+    def test_finishing_an_order_at_address(self):
+        self.homepage_object.login_procedure()
+        self.homepage_object.send_text_to_search_bar("matematica")
+        self.homepage_object.submit_search_text()
+        self.productspage_object.click_on_first_item()
+        self.itempage_object.multiply_clicks_on_add(2)
+        self.productspage_object.click_on_cart_button()
+        self.productspage_object.go_to_checkout_page()
+        self.homepage_object.cancel_cookie()
+        self.checkoutpage_object.go_to_delivery_page()
+        self.deliverypage_object.click_on_persoana_fizica()
+        self.deliverypage_object.send_correct_inputs()
+        self.deliverypage_object.stabileste_transport_curier_rapid()
+        self.deliverypage_object.go_to_payment_page()
+        self.paymentpage_object.select_ramburs_option()
+        self.paymentpage_object.go_to_summarypage_page()
+        self.summarypage_object.select_impachetare_all_items()
+        self.summarypage_object.complete_observations()
+        self.summarypage_object.finish_order()
+
