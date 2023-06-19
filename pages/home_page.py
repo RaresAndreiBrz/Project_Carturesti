@@ -1,5 +1,7 @@
 import time
 
+from selenium.webdriver import ActionChains
+
 from locators.home_page_locators import HomePageLocators
 from pages.base_page import BasePage
 
@@ -96,3 +98,29 @@ class HomePage(BasePage):
 
     def click_on_wishlist_btn(self):
         self.driver.find_element(*HomePageLocators.BTN_CONT_WISHLIST).click()
+
+    def go_to_return_policy(self):
+        self.wait_for_clickable_element(HomePageLocators.RETURN_POLICY_PAGE_LINK).click()
+
+    def click_on_products_inventory(self):
+        self.wait_for_clickable_element(HomePageLocators.BTN_PRODUCTS).click()
+
+    def put_coursor_on_music_category(self):
+        self.music_btn = self.wait_for_clickable_element(HomePageLocators.MUSIC_CATEGORY)
+        self.actions = ActionChains(self.driver)
+        self.actions.move_to_element(self.music_btn)
+
+    def put_coursor_on_disney_category(self):
+        self.disney_btn = self.wait_for_clickable_element(HomePageLocators.DISNEY_CATEGORY)
+        self.actions = ActionChains(self.driver)
+        self.actions.move_to_element(self.disney_btn)
+    def check_second_list_displyed(self):
+        self.list_items = self.wait_for_displayed_element(HomePageLocators.BOX_OF_CATEGORY_LIST)
+        assert self.list_items.is_displayed(), "Items of music category not displayed"
+
+    def go_to_assistance_page(self):
+        self.wait_for_clickable_element(HomePageLocators.GO_TO_ASSISTANCE_PAGE).click()
+
+    def check_categories_list_is_displayed(self):
+        list = self.driver.find_element(*HomePageLocators.BOX_OF_PRODUCTS_LIST)
+        assert list.is_displayed(), 'List of categories not displayed'

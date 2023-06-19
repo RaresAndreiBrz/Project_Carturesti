@@ -17,7 +17,7 @@ class ItemPage(BasePage):
         assert self.box.is_displayed(), 'Details not displayed'
 
     def add_product_to_wishlist(self):
-        time.sleep(2)
+        time.sleep(1)
         self.driver.find_element(*ItemPageLocators.BTN_ADD_PRODUCT_IN_WISHLIST).click()
-        time.sleep(2)
+        time.sleep(1)
         self.driver.find_element(*ItemPageLocators.BTN_ADD_PRODUCT_IN_WISHLIST_2).click()

@@ -1,9 +1,12 @@
 import unittest
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 
+from pages.assistance_page import AssistancePage
 from pages.base_page import BasePage
 from pages.checkout_page import CheckoutPage
 from pages.login_second_page import LoginSecondPage
+from pages.return_policy_page import ReturnPolicyPage
 from pages.summary_page import SummaryPage
 from pages.delivery_page import DeliveryPage
 from pages.home_page import HomePage
@@ -18,8 +21,10 @@ class BaseTests(unittest.TestCase):
 
     def setUp(self) -> None:
         self.driver = webdriver.Chrome()
+
         self.homepage_object = HomePage(self.driver)
         self.loginsecondpage_object = LoginSecondPage(self.driver)
+        self.assistancepage_object = AssistancePage(self.driver)
         self.productspage_object = ProductsPage(self.driver)
         self.itempage_object = ItemPage(self.driver)
         self.wishlistpage_object = WishlistPage(self.driver)
@@ -28,6 +33,7 @@ class BaseTests(unittest.TestCase):
         self.deliverypage_object = DeliveryPage(self.driver)
         self.paymentpage_object = PaymentPage(self.driver)
         self.summarypage_object = SummaryPage(self.driver)
+        self.returnpolicypage_object = ReturnPolicyPage(self.driver)
         # self.confirmationpage_object = ConfirmationPage(self.driver)
         self.driver.get('https://carturesti.ro/')
         self.driver.maximize_window()

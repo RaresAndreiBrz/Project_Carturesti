@@ -63,4 +63,9 @@ class HomePageLocators:
 
     #buttons from home_page
     MESSAGE_ERROR_PRODUCT_NOT_FOUND = (By.XPATH, '//*[@id="search-category"]')
-
+    RETURN_POLICY_PAGE_LINK = (By.XPATH, "//a[normalize-space()='Politica de retur']")
+    BOX_OF_CATEGORY_LIST = (By.XPATH, '//*[@id="menuCanvas"]')
+    BOX_OF_PRODUCTS_LIST = (By.XPATH, '//*[@id="menuCanvas"]')
+    MUSIC_CATEGORY = (By.XPATH, "//md-list-item[@role='listitem']//a[contains(text(),'Muzica')]")
+    DISNEY_CATEGORY = (By.XPATH, "//a[normalize-space()='Disney']")
+    GO_TO_ASSISTANCE_PAGE = (By.XPATH, "//body/footer/div/div[@role='contentinfo']/div/ul/li[4]/a[1]")

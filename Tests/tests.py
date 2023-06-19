@@ -1,6 +1,6 @@
 import time
 from base_test import BaseTests
-
+from selenium.webdriver import ActionChains
 
 class Tests(BaseTests):
 
@@ -225,6 +225,7 @@ class Tests(BaseTests):
         self.productspage_object.click_on_first_item()
         self.itempage_object.check_details_displayed_box()
 
+
     def test_add_product_to_wishlist(self):
         self.homepage_object.login_procedure()
         self.homepage_object.send_text_to_search_bar("albastru")
@@ -287,3 +288,35 @@ class Tests(BaseTests):
         self.summarypage_object.complete_observations()
         self.summarypage_object.finish_order()
 
+    def test_retun_policy_is_displayed(self):
+        self.homepage_object.cancel_cookie()
+        self.homepage_object.go_to_return_policy()
+        self.returnpolicypage_object.check_title_is_displayed()
+        self.returnpolicypage_object.check_text_is_displayed()
+
+    def test_items_of_music_category(self):
+        self.homepage_object.cancel_cookie()
+        self.homepage_object.click_on_products_inventory()
+        self.homepage_object.put_coursor_on_music_category()
+        self.homepage_object.check_second_list_displyed()
+
+    def test_items_of_disney_category(self):
+        self.homepage_object.cancel_cookie()
+        self.homepage_object.click_on_products_inventory()
+        self.homepage_object.put_coursor_on_disney_category()
+        self.homepage_object.check_second_list_displyed()
+
+    def test_buttons_informations_check_display(self):
+        self.homepage_object.cancel_cookie()
+        self.homepage_object.go_to_assistance_page()
+        self.assistancepage_object.check_buttons_nr_equal_with_text_boxes()
+
+    def test_display_of_categories_list(self):
+        self.homepage_object.click_on_products_inventory()
+        self.homepage_object.check_categories_list_is_displayed()
+
+    def test_review_an_item(self):
+        self.homepage_object.send_text_to_search_bar("laurentiu")
+        self.homepage_object.submit_search_text()
+        self.productspage_object.click_on_first_item()
+        self.itempage_object.review_the_item(9)

@@ -19,3 +19,4 @@ class BasePage:
         wait_displayed = WebDriverWait(self.driver, 10)
         element = wait_displayed.until(EC.presence_of_element_located(locator))
         return element
+
