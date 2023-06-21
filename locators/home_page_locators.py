@@ -50,7 +50,7 @@ class HomePageLocators:
     #cart menu
     BTN_CART = (By.CLASS_NAME, "checkout__button")
     CART_PRODUCTS_NUMBER = (By.XPATH, '//*[@data-ng-bind="cart.count()"]')
-    BTN_REMOVE_FIRST_PRODUCT = (By.XPATH, "//tr[1]/td[3]/a/i")
+    BTN_REMOVE_FIRST_PRODUCT = (By.XPATH, "/html/body/div[2]//div/div[2]//td[3]/a/i")
     CART_EMPTY_MSSG = (By.CLASS_NAME, "checkout__empty ng-scope")
     CART_EMPTY_MSSG_TEXT = "Nu aveți produse în coș."  # in html textul e urmat de spatii
 

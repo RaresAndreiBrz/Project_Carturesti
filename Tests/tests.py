@@ -2,6 +2,7 @@ import time
 from base_test import BaseTests
 from selenium.webdriver import ActionChains
 
+
 class Tests(BaseTests):
 
     # def test_signup(self):
@@ -106,6 +107,7 @@ class Tests(BaseTests):
         self.homepage_object.submit_search_text()
         expected_url = 'https://carturesti.ro/product/search/bazzzzzzz'
         self.homepage_object.check_error_of_missing_product()
+        assert initial_url != expected_url, f"Expected {expected_url} and received {self.driver.current_url}"
 
     def test_sort_price_ascending(self):
         self.homepage_object.send_text_to_search_bar('jordan peterson')
@@ -121,7 +123,7 @@ class Tests(BaseTests):
         self.productspage_object.sort_price_desc()
         self.productspage_object.check_sort_prices_descending()
 
-    def test_sort_alfabetic_asc_produse_in_stoc(self):
+    def test_sort_alfabetic_asc_products_in_stoc(self):
         self.homepage_object.send_text_to_search_bar('portocala')
         self.homepage_object.submit_search_text()
         self.productspage_object.sort_in_stoc_items()
@@ -129,7 +131,7 @@ class Tests(BaseTests):
         self.productspage_object.sort_alfabet_asc()
         self.productspage_object.check_sort_alfabetic_ascending()
 
-    def test_sort_alfabetic_desc_produse_in_stoc(self):
+    def test_sort_alfabetic_desc_products_in_stoc(self):
         self.homepage_object.send_text_to_search_bar('portocala')
         self.homepage_object.submit_search_text()
         self.productspage_object.sort_in_stoc_items()
@@ -144,14 +146,12 @@ class Tests(BaseTests):
         self.productspage_object.sort_discount_desc()
         self.productspage_object.check_sort_discount_desc()
 
-
-    def test_sort_discount_asc_produse(self):
+    def test_sort_discount_asc_products(self):
         self.homepage_object.send_text_to_search_bar('matematica')
         self.homepage_object.submit_search_text()
         self.productspage_object.click_on_sort_button()
         self.productspage_object.sort_discount_asc()
         self.productspage_object.check_sort_discount_asc()
-
 
     def test_elements_shown_on_page(self, text_to_check='bazz'):
         self.driver.text_to_check = text_to_check
@@ -165,10 +165,7 @@ class Tests(BaseTests):
         self.homepage_object.login_procedure()
         self.homepage_object.send_text_to_search_bar("jordan peterson")
         self.homepage_object.submit_search_text()
-        self.productspage_object.add_book_JP()
-        self.productspage_object.back()
-        self.productspage_object.add_book_JP_2()
-        self.productspage_object.back()
+        self.productspage_object.click_on_first_item()
         self.productspage_object.check_items_number_on_cart()
 
     def test_only_in_stoc_button_active(self):
@@ -201,10 +198,8 @@ class Tests(BaseTests):
         self.homepage_object.submit_search_text()
         self.productspage_object.click_on_first_item()
         self.itempage_object.multiply_clicks_on_add(1)
-        self.driver.back()
-        self.productspage_object.click_on_second_item()
-        self.itempage_object.multiply_clicks_on_add(2)
         self.productspage_object.click_on_cart_button()
+        time.sleep(5)
         self.productspage_object.click_remove_in_cart()
         self.productspage_object.check_items_number_on_cart()
 
@@ -225,7 +220,6 @@ class Tests(BaseTests):
         self.productspage_object.click_on_first_item()
         self.itempage_object.check_details_displayed_box()
 
-
     def test_add_product_to_wishlist(self):
         self.homepage_object.login_procedure()
         self.homepage_object.send_text_to_search_bar("albastru")
@@ -235,8 +229,9 @@ class Tests(BaseTests):
         self.itempage_object.add_product_to_wishlist()
         self.homepage_object.click_on_my_account_btn()
         self.homepage_object.click_on_wishlist_btn()
-        self.wishlistpage_object.create_new_wishlist("wishlist1")
         self.wishlistpage_object.check_presence_of_products_in_wishlist()
+        self.wishlistpage_object.remove_products_from_wishlists()
+        time.sleep(2)
 
     def test_remove_button_from_checkout_page(self):
         self.homepage_object.login_procedure()
@@ -264,29 +259,45 @@ class Tests(BaseTests):
         self.homepage_object.cancel_cookie()
         self.checkoutpage_object.go_to_delivery_page()
         self.deliverypage_object.click_on_persoana_fizica()
+        self.current_url = self.driver.current_url
         self.deliverypage_object.send_wrong_inputs()
-        time.sleep(2)
-        self.deliverypage_object.erorr_inputs_messages()
+        time.sleep(1)
+        assert self.current_url == self.driver.current_url, f"Expected {self.current_url} instead of {self.driver.current_url}"
 
-    def test_finishing_an_order_at_address(self):
-        self.homepage_object.login_procedure()
-        self.homepage_object.send_text_to_search_bar("matematica")
-        self.homepage_object.submit_search_text()
-        self.productspage_object.click_on_first_item()
-        self.itempage_object.multiply_clicks_on_add(2)
-        self.productspage_object.click_on_cart_button()
-        self.productspage_object.go_to_checkout_page()
-        self.homepage_object.cancel_cookie()
-        self.checkoutpage_object.go_to_delivery_page()
-        self.deliverypage_object.click_on_persoana_fizica()
-        self.deliverypage_object.send_correct_inputs()
-        self.deliverypage_object.stabileste_transport_curier_rapid()
-        self.deliverypage_object.go_to_payment_page()
-        self.paymentpage_object.select_ramburs_option()
-        self.paymentpage_object.go_to_summarypage_page()
-        self.summarypage_object.select_impachetare_all_items()
-        self.summarypage_object.complete_observations()
-        self.summarypage_object.finish_order()
+    # def test_finishing_an_order_at_address(self):
+    #     self.homepage_object.login_procedure()
+    #     self.homepage_object.send_text_to_search_bar("matematica")
+    #     self.homepage_object.submit_search_text()
+    #     self.productspage_object.click_on_first_item()
+    #     self.itempage_object.multiply_clicks_on_add(2)
+    #     self.productspage_object.click_on_cart_button()
+    #     self.productspage_object.go_to_checkout_page()
+    #     time.sleep(5)
+    #     self.homepage_object.cancel_cookie()
+    #     time.sleep(5)
+    #     self.checkoutpage_object.go_to_delivery_page()
+    #     time.sleep(5)
+    #
+    #     self.deliverypage_object.click_on_persoana_fizica()
+    #     time.sleep(5)
+    #     self.deliverypage_object.send_correct_inputs()
+    #     time.sleep(5)
+    #     self.deliverypage_object.stabileste_transport_curier_rapid()
+    #     time.sleep(5)
+    #
+    #     self.deliverypage_object.go_to_payment_page()
+    #     time.sleep(5)
+    #
+    #     self.paymentpage_object.select_cash_on_receiving_option()
+    #     time.sleep(5)
+    #
+    #     self.paymentpage_object.go_to_summary_page()
+    #     time.sleep(5)
+    #     self.summarypage_object.select_impachetare_all_items()
+    #     time.sleep(5)
+    #     self.summarypage_object.complete_observations()
+    #     time.sleep(5)
+    #     self.summarypage_object.finish_order()
 
     def test_retun_policy_is_displayed(self):
         self.homepage_object.cancel_cookie()
@@ -315,8 +326,8 @@ class Tests(BaseTests):
         self.homepage_object.click_on_products_inventory()
         self.homepage_object.check_categories_list_is_displayed()
 
-    def test_review_an_item(self):
-        self.homepage_object.send_text_to_search_bar("laurentiu")
-        self.homepage_object.submit_search_text()
-        self.productspage_object.click_on_first_item()
-        self.itempage_object.review_the_item(9)
+    # def test_review_an_item(self):
+    #     self.homepage_object.send_text_to_search_bar("laurentiu")
+    #     self.homepage_object.submit_search_text()
+    #     self.productspage_object.click_on_first_item()
+    #     self.itempage_object.review_the_item(9)

@@ -98,6 +98,7 @@ class HomePage(BasePage):
 
     def click_on_wishlist_btn(self):
         self.driver.find_element(*HomePageLocators.BTN_CONT_WISHLIST).click()
+        time.sleep(1)
 
     def go_to_return_policy(self):
         self.wait_for_clickable_element(HomePageLocators.RETURN_POLICY_PAGE_LINK).click()

@@ -26,11 +26,11 @@ class ProductsPage(BasePage):
 
     def sort_alfabet_asc(self):
         self.driver.find_element(*ProductsPageLocators.BTN_SORT_ALFAB_ASC).click()
-
+        time.sleep(1.5)
     def sort_alfabet_desc(self):
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_ALFAB_DESC)
         button.click()
-
+        time.sleep(1.5)
     def sort_discount_asc(self):
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_DISCOUNT_ASC)
         button.click()
@@ -85,6 +85,7 @@ class ProductsPage(BasePage):
         for nume in self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES):
             self.nume_produse.append(nume.text)
         sorted_names = sorted(self.nume_produse)
+        time.sleep(1)
         assert sorted_names == self.nume_produse, 'Sorting after name (asc) is not correct.'
 
     def check_sort_alfabetic_descending(self):
@@ -92,6 +93,7 @@ class ProductsPage(BasePage):
         for nume in self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES):
             self.nume_produse.append(nume.text)
         sorted_names = sorted(self.nume_produse, reverse=True)
+        time.sleep(1)
         assert sorted_names == self.nume_produse, 'Sorting after name (desc) is not correct.'
 
     def check_sort_discount_desc(self):
@@ -117,11 +119,11 @@ class ProductsPage(BasePage):
         time.sleep(1)
 
     def check_items_number_on_page(self):
-        lista_produse = []
+        self.lista_produse = []
         for produs in self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES):
-            self.nume_produse.append(produs)
+            self.lista_produse.append(produs)
         text_for_check = self.driver.find_element(*ProductsPageLocators.TEXT_NUMBER_OF_PRODUCTS_ON_PAGE).text
-        assert len(lista_produse) <= int(text_for_check), 'Number of objects on the page is bigger then selected'
+        assert len(self.lista_produse) <= int(text_for_check), 'Number of objects on the page is bigger then selected'
 
     def add_book_1(self):
         button = self.wait_for_clickable_element(ProductsPageLocators.BOOK_1)
@@ -138,6 +140,7 @@ class ProductsPage(BasePage):
     def click_on_cart_button(self):
         cart_btn = self.wait_for_clickable_element(HomePageLocators.BTN_CART)
         cart_btn.click()
+        time.sleep(0.5)
 
 
     def check_items_number_on_cart(self):

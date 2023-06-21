@@ -7,7 +7,7 @@ class SummaryPage(BasePage):
         self.driver.find_element(*ConfirmationPageLocators.FINISH_ORDER).click()
 
     def complete_observations(self):
-        self.driver.find_element(*ConfirmationPageLocators.OBSERVATIONS_INPUT).send_keys("ANULATI ACEASTA COMANDA AUTOMATA")
+        self.wait_for_displayed_element(ConfirmationPageLocators.OBSERVATIONS_INPUT).send_keys("ANULATI ACEASTA COMANDA AUTOMATA")
 
     def select_impachetare_all_items(self):
         self.driver.find_element(*ConfirmationPageLocators.PACK_GIFT_OPTION).click()

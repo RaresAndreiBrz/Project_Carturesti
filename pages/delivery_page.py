@@ -1,3 +1,5 @@
+import time
+
 from locators.delivery_page_locators import DeliveryPageLocators
 from pages.base_page import BasePage
 
@@ -21,7 +23,8 @@ class DeliveryPage(BasePage):
         self.wait_for_displayed_element(DeliveryPageLocators.COMPANY_OPTION).click()
 
     def go_to_payment_page(self):
-        self.wait_for_displayed_element(DeliveryPageLocators.INDIVIDUAL_OPTION).click()
+        self.driver.find_element(*DeliveryPageLocators.TOWARDS_PAYMENT_BTN).click()
+        time.sleep(1)
 
     def send_wrong_inputs(self):
         self.driver.find_element(*DeliveryPageLocators.FIRST_NAME_INPUT).send_keys(' ')
@@ -30,20 +33,24 @@ class DeliveryPage(BasePage):
         self.driver.find_element(*DeliveryPageLocators.ADDRESS_TEXT_INPUT).send_keys('AAA')
         self.driver.find_element(*DeliveryPageLocators.CITY_DROP_INPUT).click()
         self.driver.find_element(*DeliveryPageLocators.CITY_DROP_INPUT_BUCURESTI).click()
-        self.driver.find_element(*DeliveryPageLocators.TOWN_DROP_INPUT).click()
-        self.driver.find_element(*DeliveryPageLocators.TOWN_SECTOR_6).click()
+
 
 
     def send_correct_inputs(self):
-        self.driver.find_element(*DeliveryPageLocators.FIRST_NAME_INPUT).send_keys('FN')
-        self.driver.find_element(*DeliveryPageLocators.LAST_NAME_INPUT).send_keys('LN')
-        self.driver.find_element(*DeliveryPageLocators.PHONE_NR_INPUT).send_keys('++40766123456')
+        self.driver.find_element(*DeliveryPageLocators.FIRST_NAME_INPUT).send_keys('jkb')
+        self.driver.find_element(*DeliveryPageLocators.LAST_NAME_INPUT).send_keys('sadasd')
+        self.driver.find_element(*DeliveryPageLocators.PHONE_NR_INPUT).send_keys('+40767000000')
         self.driver.find_element(*DeliveryPageLocators.POSTAL_CODE_INPUT).send_keys('000000')
         self.driver.find_element(*DeliveryPageLocators.ADDRESS_TEXT_INPUT).send_keys('ADRS')
+        time.sleep(0.3)
         self.driver.find_element(*DeliveryPageLocators.CITY_DROP_INPUT).click()
+        time.sleep(0.3)
         self.driver.find_element(*DeliveryPageLocators.CITY_DROP_INPUT_BUCURESTI).click()
+        time.sleep(0.3)
         self.driver.find_element(*DeliveryPageLocators.TOWN_DROP_INPUT).click()
-        self.driver.find_element(*DeliveryPageLocators.TOWN_DROP_INPUT_SECTOR6).click()
+        time.sleep(0.3)
+        self.driver.find_element(*DeliveryPageLocators.TOWN_DROP_INPUT_SECTOR).click()
+        time.sleep(0.3)
 
     def stabileste_transport_gratuit(self):
         try:
@@ -78,7 +85,7 @@ class DeliveryPage(BasePage):
 
         assert suma_totala_lei == suma_transport_lei + suma_produse_lei, "CIfrele costurilor platii nu coincid"
 
-    def erorr_inputs_messages(self):
+    def check_erorr_inputs_messages(self):
         erori_vizibile = 0
         list_of_errors = self.driver.find_elements(*DeliveryPageLocators.TEXTS_ERRORS)
         for i in range(len(list_of_errors)):
