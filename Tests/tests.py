@@ -1,6 +1,8 @@
 import time
-from base_test import BaseTests
+
 from selenium.webdriver import ActionChains
+
+from Tests.base_test import BaseTests
 
 
 class Tests(BaseTests):
@@ -235,7 +237,7 @@ class Tests(BaseTests):
 
     def test_remove_button_from_checkout_page(self):
         self.homepage_object.login_procedure()
-        self.homepage_object.send_text_to_search_bar("matematica")
+        self.homepage_object.send_text_to_search_bar("masca")
         self.homepage_object.submit_search_text()
         self.productspage_object.click_on_first_item()
         self.itempage_object.multiply_clicks_on_add(3)
@@ -250,7 +252,7 @@ class Tests(BaseTests):
 
     def test_wrong_info_delivery_inputs1(self):
         self.homepage_object.login_procedure()
-        self.homepage_object.send_text_to_search_bar("matematica")
+        self.homepage_object.send_text_to_search_bar("albastru")
         self.homepage_object.submit_search_text()
         self.productspage_object.click_on_first_item()
         self.itempage_object.multiply_clicks_on_add(2)
@@ -298,6 +300,12 @@ class Tests(BaseTests):
     #     self.summarypage_object.complete_observations()
     #     time.sleep(5)
     #     self.summarypage_object.finish_order()
+#----------------------------------------------------------------
+    # def test_review_an_item(self):
+    #     self.homepage_object.send_text_to_search_bar("laurentiu")
+    #     self.homepage_object.submit_search_text()
+    #     self.productspage_object.click_on_first_item()
+    #     self.itempage_object.review_the_item(9)
 
     def test_retun_policy_is_displayed(self):
         self.homepage_object.cancel_cookie()
@@ -326,8 +334,3 @@ class Tests(BaseTests):
         self.homepage_object.click_on_products_inventory()
         self.homepage_object.check_categories_list_is_displayed()
 
-    # def test_review_an_item(self):
-    #     self.homepage_object.send_text_to_search_bar("laurentiu")
-    #     self.homepage_object.submit_search_text()
-    #     self.productspage_object.click_on_first_item()
-    #     self.itempage_object.review_the_item(9)

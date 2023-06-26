@@ -1,6 +1,5 @@
 import unittest
 from selenium import webdriver
-from selenium.webdriver import ActionChains
 
 from pages.assistance_page import AssistancePage
 from pages.base_page import BasePage
