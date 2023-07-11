@@ -2,7 +2,8 @@ import unittest
 
 import HtmlTestRunner
 
-from tests import Tests
+
+from Tests.tests import Tests
 
 
 class MyTestSuite(unittest.TestCase):
