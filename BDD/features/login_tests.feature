@@ -3,42 +3,82 @@ Feature: Loging in situations
   I want to login on this site
   So that i can be able to purchase products
 
-  Scenario: Test valid login using valid credentials
-    When I am on the homepage of the site
-    Given I enter valid mail and valid password
-    Then I should be able to see that i am logged in
-    
-#  Scenario: Test invalid login with no password
-#    When I am on the homepage of the site
-#    Given I enter valid mail and no password
-#    Then I should be able to see an error on password section
+#  Scenario: Test valid login using valid credentials
+#    Given I click on login button
+#    And I select existing user
+#    And I enter a valid mail
+#    And I enter a valid password
+#    And I click on authentication button
+#    Then I should be able to see that i am logged in
 #
-#  Scenario: Test invalid login with no mail
-#    When I am on the homepage of the site
-#    Given I enter valid password and no mail
-#    Then I should be able to see an error on mail section
+#  Scenario: Test invalid login with valid mail and no password
+#    Given I click on login button
+#    And I select existing user
+#    And I enter a valid mail
+#    And I enter no password
+#    And I click on authentication button
+#    Then I should be able to see an error message
 #
-#  Scenario: Test invalid login with invalid password
-#    When I am on the homepage of the site
-#    Given I enter invalid password and valid mail
-#    Then I should be able to see an error on password section
-#
-#  Scenario: Test invalid login with invalid mail
-#    When I am on the homepage of the site
-#    Given I enter invalid mail and valid password
-#    Then I should be able to see an error on mail section
-#
-#  Scenario: Test invalid login with invalid mail and invalid password
-#    When I am on the homepage of the site
-#    Given I enter invalid mail and invalid password
-#    Then I should be able to see an error on mail and password section
-#
-#  Scenario: Test invalid login with invalid mail and valid password
-#    When I am on the homepage of the site
-#    Given I enter invalid mail and valid password
-#    Then I should be able to see an error on mail section
+#  Scenario: Test invalid login with no mail and valid password
+#    Given I click on login button
+#    And I select existing user
+#    And I enter no mail
+#    And I enter a valid password
+#    And I click on authentication button
+#    Then I should be able to see an error message
 #
 #  Scenario: Test invalid login with valid mail and invalid password
-#    When I am on the homepage of the site
-#    Given I enter valid mail and invalid password
-#    Then I should be able to see an error on mail section
+#    Given I click on login button
+#    And I select existing user
+#    And I enter a valid mail
+#    And I enter an invalid password
+#    And I click on authentication button
+#    Then I should be redirected to login form page
+#
+#  Scenario: Test invalid login with invalid mail and valid password
+#    Given I click on login button
+#    And I select existing user
+#    And I enter an invalid mail
+#    And I enter a valid password
+#    And I click on authentication button
+#    Then I should be redirected to login form page
+#
+#  Scenario: Test login on SecondLoginPage with invalid credentials
+#    Given I click on login button
+#    And I select existing user
+#    And I enter an invalid mail
+#    And I enter an invalid password
+#    And I click on authentication button
+#    And I send invalid credentials on the login form
+#    And I click on authentication button from LoginForm
+#    Then I should be on the same page
+#
+#  Scenario: Test login on SecondLoginPage with invalid mail and valid password
+#    Given I click on login button
+#    And I select existing user
+#    And I enter a valid mail
+#    And I enter an invalid password
+#    And I click on authentication button
+#    And I enter invalid mail and valid password
+#    And I click on authentication button from LoginForm
+#    Then I should be on the same page
+#
+#  Scenario: Test login on SecondLoginPage with valid mail and invalid password
+#    Given I click on login button
+#    And I select existing user
+#    And I enter a valid mail
+#    And I enter an invalid password
+#    And I click on authentication button
+#    And I enter valid mail and invalid password
+#    And I click on authentication button from LoginForm
+#    Then I should be on the same page
+#
+#  Scenario: Test login on SecondLoginPage with valid credentials
+#    Given I click on login button
+#    And I select existing user
+#    And I enter a valid mail
+#    And I enter an invalid password
+#    And I click on authentication button
+#    And I enter valid credentials
+#    And I click on authentication button from LoginForm
+#    Then I should be able to see that i am logged in

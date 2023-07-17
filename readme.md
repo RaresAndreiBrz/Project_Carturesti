@@ -2,100 +2,75 @@
 ## *TEST PLAN*
 </br>
 
-### Revision History
 
-|    Date    | Description |       Author        |              Comments               |
-|:----------:| :-------------:|:-------------------:|:-----------------------------------:|
-| 01.06.2023 | v1.0 | Brinza Rares Andrei |             Draft Plan              |
-| 03.06.2023 | v1.1  |   Brinza Rares Andrei     |        Tests implementation         |
-| 25.06.2023 | v1.2 |   Brinza Rares Andrei     | Test Results for Functional Testing | 
+### 1. <ins>Introduction<ins>
+        I recently finished an Automation Testing course. This project is my first individual job where i decided to 
+      implement my knowledge and gain more experience along the way.I chose this site because it has a lot of functionalities
+      and helps me go beyond simple and usual things. I thought that complexity and dimension of the site will help me improve
+      and provoke me to make steps forward.
+### 2. <ins>Project details<ins>
+   #### 2.1 How i started
+        I started by making a list of tests that I saw as important. As a user, I am interested in being able to move around
+      easily and have all the functionalities of the site working correctly. From login situations where my personal data is
+      involved to the steps of purchasing, I want everything to function properly.
+   #### 2.2 First steps
+        I created a page and wrote the basis for tests. It's a page where the setup is initiated, including driver selection, 
+      instance creation for every class and page I worked on, and opening and closing of the browser. The next file was 
+      the base page, which contains a few general functions called multiple times during tests. The purpose of this is to 
+      make the code simpler, well-structured, and easier to use by calling these functions whenever necessary.
+   #### 2.3 Second part
+        Creating a file for each page and its html locators. Each page has functions taht plays a role in defined tests
+      The locators page also have the role of structuring the code and tests giving the chance to refactor at any given time.
+      Files with the pages and locators are situated in separtely directories.
+   #### 2.4 Writing the tests.
+        At this point i started working on my lists of tests. One by one I implemented all. After each test passed/failed i went
+      working on next one. Giving me the possibility to have them all correctly done at the end.
+      Base test file along with the written tests and report runner file were put in 'Tests' directory of the project.
+   #### 2.5 End point
+        After all files were done a refactoring process was done for the entire project.
+      At the end of it I ran the report in html format to have the tests results and bugs found in a readable format.
+   #### 2.6 Tests results
+        All tests passed,
+        One test having an issue
+   #### 2.7 Bugs report
+        The test that confirms if a specific category selected by the user only shows the requested products has failed.
+      The category in question is 'IN STOC' (In Stock) products. When the user selects this category, the site automatically 
+      selects the 'Stoc Limitat' (Limited Stock) option as well. However, the user did not request this category for their 
+      product search, and not only is the option automatically selected, but the user is also unable to deselect the category. 
+      As a user, I find this inconvenient because I am forced to see and obtain products that I did not ask for.
+        The last aspect observed during testing was related to the order shipping options. The website offers multiple 
+      possibilities for customers to receive their orders, but not all options are available and visible at all times. 
+      Depending on the time of day when the order is placed, different options are available, while others are not even visible. 
+      As a user (possibly a new user), I would like to know that there are other possibilities besides the ones currently 
+      offered, even if they are unavailable for selection. Providing me with these options would be much more beneficial 
+      for me when it comes to placing an order.
 </br>
 </br>
 
-#### 1. <ins>Introduction<ins>
-   #### 1.1 Project objective
-   #### 1.2 Functionalities in scope
-   #### 1.3 Functionalities and tests out of scope
-#### 2. <ins>Test Process<ins>
-   #### 2.1 Test Planning
-   #### 2.2 Test Analysis
-   #### 2.3 Test Design
-   #### 2.4 Test Implementation
-   #### 2.5 Test Execution
-   #### 2.6 Test Completion
-   #### 2.7 Test Monitoring and Control
-#### 3.<ins> Test Deliverables<ins> 
-   #### 3.1 Test plan
-   #### 3.2 Test cases
-   #### 3.3 Traceability matrix
-   #### 3.4 Test case results
-   #### 3.5 Bugs report
-</br>
-</br>
-   
-## 1. <ins>Introduction<ins>
-   This test plan describes the strategies, process, workflows and methodologies used to plan, organize, execute and manage testing process for Carturesti browser application.
-### 1.1 Project objective
-   The scope of this project is to use knowledge gained through the recently finished course and apply them in practice using a live application. 
-   
-   [Application under test](https://carturesti.ro/)
-   
-   **Tools**: Selenium, BDD Behavior_driven_development
-</br>  
-   
-### 1.2 Functionalities in scope
-   All features of the target website's user module need to be covered by automated tests using Selenium and BDD (Behavior-Driven Development) framework./
-The objective of the automated tests is to ensure the proper functioning and behavior of the website's user module. The tests should cover functional scenarios, GUI interactions, and API integrations, as specified in the requirements.
-
-The Selenium-based automated tests will simulate user actions and interactions with the website's interface. The BDD framework will provide a structured approach to define test scenarios in a human-readable format and facilitate collaboration between technical and non-technical stakeholders.
-
-The automated tests will validate the functionality of each feature, ensuring that the expected results are obtained, the GUI elements are displayed correctly, and the API integrations work as intended.
-   
-
-### 1.3 Functionalities and tests out of scope
-  - All functionalities that the web aplication offers to users.
-  - Non-functional testing like stress, performance is beyond scope of this project.
-  - No QA support for mobile application developed. Only web application will be tested.
   
-## 2. <ins>Test Process<ins>
-  ### 2.1 Test Planning 
+## 3. <ins>Test Implementation<ins>
+   As an environment, IDE PyCharm has been chosen, with Python3.
+   Chrome was the main used browser.
+   During the project I used libraries as unittest, Selenium, ActionChains, time, BDD,  HtmlRunner.
+   While entire programs and all the libraries are installed and working on computer system, this project can function.
    
-#### Roles and responsabilities:
-| **Role** | **Name** |
-| :-------------: | :-------------:| 
-| Software Developer | Brinza Rares Andrei |
-| Project Manager| Brinza Rares Andrei |
+#### 4.Other Mentions   
+### Target
+   The tested were done on 'https://carturesti.ro/' website.
 
-   
-#### Entry criteria :
-   - Functional specification defined
-#### Exit criteria : 
-   - All test cases have been executed
-   - The number of unresolved bugs is insignificant or have low priority
-   - All resolved bugs have been re-tested  
-   - Deadline was reached
-   - No detected major risks remained unresolved
-   
-#### Risks :
-   ***Project risks***:
-   - Lack of experience of the developer
-   - Only one person responsabile for the project
-   - Complexity of test management
-   - Test environment instability
-   - Limited test scalability
-   
-   ***Product risks***:
-   - Confusing user interface.
-   - Poor performance or slow response time. 
-   - Unstable software or frequent errors. 
-   - Compatibility issues with platforms and browsers. 
-   - Security vulnerabilities.
-   
-### 2.2 Test Analysis
-   - analyze business requirements to make sure that we have all information for creating the test condition
-   - write test conditions that will be tested out in test process
-   
-   ***Test Conditions:***
+### Risks
+   This project is for learning only. Lack of experience, individual work, limited scalability and complexity of tests management 
+might unbalance the quality of this project.
+
+
+### CONCLUSIONS
+   As the test results indicate, all the functionalities work in different situations, except for the category that can 
+be interpreted as both helpful and inconvenient. The only advice I have is regarding the transportation options for client 
+orders, which I strongly recommend. Providing multiple choices to the client makes it easier for them to make a decision 
+based on their current situation, even if those options are available or not.
+
+---------------------------------------------------------
+### Tests used
    
    1. Test that user can create an account
    2. Test the sign-in functionality by completing the login process with valid credentials.
@@ -131,52 +106,8 @@ The automated tests will validate the functionality of each feature, ensuring th
    32. Test for checking the items in the Disney category.
    33. Test for checking the display of button information.
    34. Test for checking the display of the categories list.
-  
-   
-### 2.3 Test Design
-   - functional test cases will be created in PyCharm 
-   - test cases using the Selenium WebDriver in Python
-   - Chrome Driver used for the automated tests
-
-
-### 2.4 Test Implementation
-   Verify that the following elements are ready before the test execution phase: 
-   - test environment is up and running:  https://carturesti.ro/ (acces not required for the current situation)
-   - Python v3.1 along with PyCharm installed.
-   
-### 2.5 Test Execution
-   - bug reports were created based on the failed test cases. 
-   - test cases were executed 
-
-### 2.6 Test Completion
-   This project was created for personal porposes only. 
-   
-### 2.7 Test Monitoring and Control   
-   Generate periodic reports to check the project status: status for the test cases executed.
-
-repooooooooooooooooort ###########################
-
-## 3.<ins> Test Deliverables<ins> 
-   ### 3.1 Test plan
-   No further plans.
-   
-   ### 3.2 Tests cases
-
- [Test cases](https://github.com/RaresAndreiBrz/Project_Carturesti/tree/main/Tests)
-
    
 
-   ### 3.3 Traceability matrix
+   ### 3.3 Link of GitHub where this project is located
 
-![Traceability matrix](https://github.com/RaresAndreiBrz/Project_Carturesti/)
-
-
-   ### 3.4 Test case results
-
-[Test Cases Results](repoooort link git)
-
-   ### 3.5 Bugs report
-   
-[Bugs](report BUUUGS)
-
-
+ https://github.com/RaresAndreiBrz/Project_Carturesti

@@ -10,8 +10,7 @@ class HomePageLocators:
     BTN_NEW_USER = (By.ID, "signupTrigger")
     BTN_EXISTING_USER = (By.XPATH, '//button[@id="loginTrigger"]')
     BTN_AUTH = (By.XPATH, '//*[@id="modalLoginForm"]/div[3]/button')
-    BTN_GOOGLE_LOGIN = (By.CLASS_NAME, "google auth-link")
-    BTN_FB_LOGIN = (By.CLASS_NAME, "facebook auth-link")
+
 
     # signin locs
     SIGN_IN_EMAIL_INPUT = (By.ID, "loginform-email")
@@ -23,7 +22,6 @@ class HomePageLocators:
     MAIL_for_USER = "testing@gmail.comm"
     PWD_for_USER = "testingsite"
     SIGNUP_SUCCESS_MSG = (By.ID, "w2-success")
-    SIGNUP_SUCCESS_MSG_TEXT = "Inregistrarea a fost realizata cu succes. Am trimis un email de confirmare către adresa furnizata."
 
     # recaptcha locs
     BTN_BOX_RECAPTCHA = (By.XPATH, '//*[@id="rc-anchor-container"]/div[3]/div[1]/div')
@@ -34,7 +32,6 @@ class HomePageLocators:
 
     #alerts locs
     ALERT_MSG_WRONG_MAILorPWD = (By.CLASS_NAME, "help-block md-input-message-animation")
-    ALERT_MSG = "Acest câmp trebuie completat."
 
     #menu buttons
     SEARCH_BAR = (By.ID, "search-input")
@@ -51,8 +48,6 @@ class HomePageLocators:
     BTN_CART = (By.CLASS_NAME, "checkout__button")
     CART_PRODUCTS_NUMBER = (By.XPATH, '//*[@data-ng-bind="cart.count()"]')
     BTN_REMOVE_FIRST_PRODUCT = (By.XPATH, "/html/body/div[2]//div/div[2]//td[3]/a/i")
-    CART_EMPTY_MSSG = (By.CLASS_NAME, "checkout__empty ng-scope")
-    CART_EMPTY_MSSG_TEXT = "Nu aveți produse în coș."  # in html textul e urmat de spatii
 
     #buttons my_account
     BTN_CONT_SALUT = (By.XPATH, '//*[@id="accountDropdown"]')
