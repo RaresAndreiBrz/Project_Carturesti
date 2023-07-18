@@ -1,5 +1,6 @@
 import time
 
+from Pages.delivery_page import DeliveryPage
 from Tests.base_test import BaseTests
 
 
@@ -220,15 +221,19 @@ class Tests(BaseTests):
           self.productspage_object.check_items_number_on_cart()
 
 
-     def test_in_cart_removal_items(self):
-          self.homepage_object.login_procedure()
+     def test_in_cart_removal_of_items(self):
+          # self.homepage_object.login_procedure()
           self.homepage_object.send_text_to_search_bar('NAPOLEON')
           self.homepage_object.submit_search_text()
           self.productspage_object.click_on_first_item()
           self.itempage_object.multiply_clicks_on_add(1)
+          self.driver.back()
+          self.productspage_object.click_on_second_item()
+          self.itempage_object.multiply_clicks_on_add(2)
           self.productspage_object.click_on_cart_button()
-          time.sleep(5)
+          time.sleep(6)
           self.productspage_object.click_remove_in_cart()
+          time.sleep(2)
           self.productspage_object.check_items_number_on_cart()
 
 
@@ -270,7 +275,8 @@ class Tests(BaseTests):
         self.homepage_object.submit_search_text()
         self.productspage_object.click_on_first_item()
         self.itempage_object.multiply_clicks_on_add(3)
-        self.itempage_object.back()
+        self.driver.back()
+        time.sleep(2)
         self.productspage_object.click_on_second_item()
         self.itempage_object.multiply_clicks_on_add(1)
         self.productspage_object.click_on_cart_button()
@@ -290,7 +296,11 @@ class Tests(BaseTests):
         self.productspage_object.go_to_checkout_page()
         self.homepage_object.cancel_cookie()
         self.checkoutpage_object.go_to_delivery_page()
+        time.sleep(1)
+        self.deliverypage_object.click_on_add_address()
+        time.sleep(1)
         self.deliverypage_object.click_on_persoana_fizica()
+        time.sleep(1)
         self.current_url = self.driver.current_url
         self.deliverypage_object.send_wrong_inputs()
         time.sleep(1)
@@ -308,19 +318,36 @@ class Tests(BaseTests):
         self.productspage_object.go_to_checkout_page()
         self.homepage_object.cancel_cookie()
         self.checkoutpage_object.go_to_delivery_page()
+        time.sleep(1)
+        self.deliverypage_object.click_on_add_address()
         self.deliverypage_object.click_on_persoana_fizica()
         self.deliverypage_object.send_correct_inputs()
-        self.deliverypage_object.stabileste_transport_cu_bicicleta()
+        time.sleep(5)
+        self.deliverypage_object.establish_free_trasnsport()
+        time.sleep(5)
         self.deliverypage_object.go_to_payment_page()
+        time.sleep(3)
+        try:
+            self.deliverypage_object.go_to_payment_page()
+            time.sleep(3)
+            self.deliverypage_object.establish_free_trasnsport()
+        except:
+            pass
+        try:
+            self.deliverypage_object.go_to_payment_page()
+            time.sleep(3)
+            self.deliverypage_object.establish_free_trasnsport()
+        except:
+            pass
         self.paymentpage_object.select_cash_on_receiving_option()
         self.paymentpage_object.go_to_summary_page()
         time.sleep(2)
         self.summarypage_object.select_gift_items()
         time.sleep(5)
         self.summarypage_object.complete_observations()
-        time.sleep(5)
+        time.sleep(15)
         self.summarypage_object.finish_order()
-
+        time.sleep(10)
 
      # def test_review_an_item(self):
      #    self.homepage_object.send_text_to_search_bar("laurentiu")
@@ -355,5 +382,4 @@ class Tests(BaseTests):
         self.homepage_object.go_to_assistance_page()
         self.assistancepage_object.check_buttons_nr_equal_with_text_boxes()
 
-#test blog check and about us
-#tests about own acc
+

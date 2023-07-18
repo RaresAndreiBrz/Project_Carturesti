@@ -154,8 +154,7 @@ class ProductsPage(BasePage, softest.TestCase):
         for item in number_of_items_added:
             items_added.append(int(item.text))
         sum_items = sum(items_added)
-        assert int(number_on_cart) == int(
-            sum_items), 'The number of added objects is not the same with the one from cart icon'
+        assert int(number_on_cart) == int(sum_items), 'The number of added objects is not the same with the one from cart icon'
 
     def click_pe_stoc_limitat_sorting(self):
         time.sleep(1)
@@ -245,7 +244,7 @@ class ProductsPage(BasePage, softest.TestCase):
     def click_on_second_item(self):
         time.sleep(1)
         items_on_page = self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES)
-        item_to_add = items_on_page[1]
+        item_to_add = items_on_page[2]
         item_to_add.click()
 
     def click_remove_in_cart(self):

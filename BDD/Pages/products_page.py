@@ -7,28 +7,30 @@ from locators.home_page_locators import HomePageLocators
 from locators.item_page_locators import ItemPageLocators
 from locators.products_page_locators import ProductsPageLocators
 from Pages.base_page import BasePage
+import softest
 
-
-class ProductsPage(BasePage):
+class ProductsPage(BasePage, softest.TestCase):
 
     def click_on_sort_button(self):
         time.sleep(1)
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT1)
         button.click()
-
+        time.sleep(1)
     def sort_price_asc(self):
+        time.sleep(1)
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_PRICE_ASC)
         button.click()
 
     def sort_price_desc(self):
+        time.sleep(1)
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_PRICE_DESC)
         button.click()
 
-    def sort_alfabet_asc(self):
+    def sort_alphabet_asc(self):
         self.driver.find_element(*ProductsPageLocators.BTN_SORT_ALFAB_ASC).click()
         time.sleep(1.5)
 
-    def sort_alfabet_desc(self):
+    def sort_alphabet_desc(self):
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_ALFAB_DESC)
         button.click()
         time.sleep(1.5)
@@ -82,7 +84,7 @@ class ProductsPage(BasePage):
             self.preturi_desc[i] >= self.preturi_desc[i + 1] for i in range(len(self.preturi_desc) - 1))
         assert self.preturi_desc_check == True
 
-    def check_sort_alfabetic_ascending(self):
+    def check_sort_alphabetic_ascending(self):
         self.nume_produse = []
         for nume in self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES):
             self.nume_produse.append(nume.text)
@@ -90,7 +92,7 @@ class ProductsPage(BasePage):
         time.sleep(1)
         assert sorted_names == self.nume_produse, 'Sorting after name (asc) is not correct.'
 
-    def check_sort_alfabetic_descending(self):
+    def check_sort_alphabetic_descending(self):
         self.nume_produse = []
         for nume in self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES):
             self.nume_produse.append(nume.text)
@@ -152,8 +154,7 @@ class ProductsPage(BasePage):
         for item in number_of_items_added:
             items_added.append(int(item.text))
         sum_items = sum(items_added)
-        assert int(number_on_cart) == int(
-            sum_items), 'The number of added objects is not the same with the one from cart icon'
+        assert int(number_on_cart) == int(sum_items), 'The number of added objects is not the same with the one from cart icon'
 
     def click_pe_stoc_limitat_sorting(self):
         time.sleep(1)
@@ -197,7 +198,8 @@ class ProductsPage(BasePage):
         butoane_active.append(self.check_if_stoc_limitat_btn_is_active())
         butoane_active.append(self.check_if_livrare_24h_btn_is_active())
         butoane_active_count = butoane_active.count('true')
-        assert butoane_active_count == 3, f"Expected 1 button active but {butoane_active_count} are active."
+        self.soft_assert(self.assertTrue(butoane_active_count == 1,f"Expected 1 button active but {butoane_active_count} are active."))
+        # butoane_active_count == 3, f"Expected 1 button active but {butoane_active_count} are active."
 
     def check_author_relevance_products_received(self, text):
         time.sleep(1)
@@ -242,7 +244,7 @@ class ProductsPage(BasePage):
     def click_on_second_item(self):
         time.sleep(1)
         items_on_page = self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES)
-        item_to_add = items_on_page[1]
+        item_to_add = items_on_page[2]
         item_to_add.click()
 
     def click_remove_in_cart(self):

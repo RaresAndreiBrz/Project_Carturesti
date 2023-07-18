@@ -18,6 +18,7 @@ class DeliveryPageLocators:
     TOWN_DROP_INPUT = (By.XPATH, '//*[@id="checkoutaddressform-id_city"]')
     TOWN_DROP_INPUT_SECTOR = (By.XPATH, '//*[@id="checkoutaddressform-id_city"]/option[4]')
     ADDRESS_TEXT_INPUT = (By.XPATH, '//*[@id="checkoutaddressform-address"]')
+    ADD_ADDRESS = (By.XPATH, '//*[@id="shipping-form"]/div[2]/div[1]/div[3]/label')
     POSTAL_CODE_INPUT = (By.XPATH, '//*[@id="checkoutaddressform-zip_code"]')
 
 

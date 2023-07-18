@@ -15,6 +15,3 @@ class SummaryPage(BasePage):
     def select_gift_all_items(self):
         self.driver.find_element(*ConfirmationPageLocators.PACK_ALL_PRODUCTS).click()
 
-    def select_impachetare_items_separately(self):
-        self.driver.find_element(*ConfirmationPageLocators.PACK_GIFT_OPTION).click()
-        self.driver.find_element(*ConfirmationPageLocators.PACK_PRODUCTS_SEPARATELY).click()

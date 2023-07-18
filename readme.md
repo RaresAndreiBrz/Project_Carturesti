@@ -37,13 +37,17 @@
       The category in question is 'IN STOC' (In Stock) products. When the user selects this category, the site automatically 
       selects the 'Stoc Limitat' (Limited Stock) option as well. However, the user did not request this category for their 
       product search, and not only is the option automatically selected, but the user is also unable to deselect the category. 
-      As a user, I find this inconvenient because I am forced to see and obtain products that I did not ask for.
+      As a user, I find this inconvenient because I am forced to see and obtain products that I did not ask for,although i find logical
+      presence of limited available products.
         The last aspect observed during testing was related to the order shipping options. The website offers multiple 
       possibilities for customers to receive their orders, but not all options are available and visible at all times. 
       Depending on the time of day when the order is placed, different options are available, while others are not even visible. 
       As a user (possibly a new user), I would like to know that there are other possibilities besides the ones currently 
       offered, even if they are unavailable for selection. Providing me with these options would be much more beneficial 
       for me when it comes to placing an order.
+
+
+
 </br>
 </br>
 

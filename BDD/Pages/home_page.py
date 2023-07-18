@@ -66,7 +66,7 @@ class HomePage(BasePage):
 
     def check_wrong_pwd_mail_mssg(self):
         msg_pwd_fail_check = self.wait_for_displayed_element(HomePageLocators.BTN_AUTH)
-        assert msg_pwd_fail_check.is_displayed(), "You are not on login form"
+        assert msg_pwd_fail_check.is_displayed() == True, "You are not on login form"
 
     def send_text_to_search_bar(self, text_to_search):
         time.sleep(1)
@@ -100,7 +100,7 @@ class HomePage(BasePage):
 
     def click_on_products_inventory(self):
         self.wait_for_clickable_element(HomePageLocators.BTN_PRODUCTS).click()
-
+        time.sleep(0.5)
     def put_cursor_on_music_category(self):
         self.music_btn = self.wait_for_clickable_element(HomePageLocators.MUSIC_CATEGORY)
         self.actions = ActionChains(self.driver)

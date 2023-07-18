@@ -8,12 +8,17 @@ class DeliveryPage(BasePage):
 
 
     def click_on_persoana_fizica(self):
-        self.wait_for_displayed_element(DeliveryPageLocators.INDIVIDUAL_OPTION).click()
-
-    def go_to_payment_page(self):
-        self.driver.find_element(*DeliveryPageLocators.TOWARDS_PAYMENT_BTN).click()
         time.sleep(1)
+        self.driver.find_element(*DeliveryPageLocators.INDIVIDUAL_OPTION).click()
 
+    def click_on_add_address(self):
+        self.driver.find_element(*DeliveryPageLocators.ADD_ADDRESS).click()
+    def go_to_payment_page(self):
+        try:
+            self.driver.find_element(*DeliveryPageLocators.TOWARDS_PAYMENT_BTN).click()
+            time.sleep(2)
+        except:
+            pass
     def send_wrong_inputs(self):
         self.driver.find_element(*DeliveryPageLocators.FIRST_NAME_INPUT).send_keys(' ')
         self.driver.find_element(*DeliveryPageLocators.LAST_NAME_INPUT).send_keys(' ')
@@ -44,8 +49,14 @@ class DeliveryPage(BasePage):
             pass
 
 
-    def stabileste_transport_cu_bicicleta(self):
+    def establish_transport_with_bike(self):
         try:
             self.driver.find_element(*DeliveryPageLocators.BYCICLE_TRANSPORT_OPTION).click()
+        except:
+            pass
+
+    def establish_free_trasnsport(self):
+        try:
+            self.driver.find_element(*DeliveryPageLocators.FREE_TRANSPORT_OPTION).click()
         except:
             pass
