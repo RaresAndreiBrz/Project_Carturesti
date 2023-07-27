@@ -12,23 +12,23 @@ import softest
 class ProductsPage(BasePage, softest.TestCase):
 
     def click_on_sort_button(self):
-        time.sleep(1)
+        time.sleep(0.5)
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT1)
         button.click()
         time.sleep(1)
     def sort_price_asc(self):
-        time.sleep(1)
+        time.sleep(0.5)
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_PRICE_ASC)
         button.click()
 
     def sort_price_desc(self):
-        time.sleep(1)
+        time.sleep(0.5)
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_PRICE_DESC)
         button.click()
 
     def sort_alphabet_asc(self):
         self.driver.find_element(*ProductsPageLocators.BTN_SORT_ALFAB_ASC).click()
-        time.sleep(1.5)
+        time.sleep(1)
 
     def sort_alphabet_desc(self):
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT_ALFAB_DESC)
@@ -45,7 +45,7 @@ class ProductsPage(BasePage, softest.TestCase):
         button.click()
         time.sleep(1)
 
-    def click_on_sort_itemsNr_button(self):
+    def click_on_sort_items_number_button(self):
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_SORT2_PRODUCT_TO_DISPLAY)
         button.click()
 
@@ -117,7 +117,7 @@ class ProductsPage(BasePage, softest.TestCase):
         assert self.discount_list_products_int == sorted(self.discount_list_products_int)
 
     def sort_in_stoc_items(self):
-        time.sleep(1)
+        time.sleep(0.5)
         button = self.wait_for_clickable_element(ProductsPageLocators.BTN_IN_STOC)
         button.click()
         time.sleep(1)
@@ -199,44 +199,40 @@ class ProductsPage(BasePage, softest.TestCase):
         butoane_active.append(self.check_if_livrare_24h_btn_is_active())
         butoane_active_count = butoane_active.count('true')
         self.soft_assert(self.assertTrue(butoane_active_count == 1,f"Expected 1 button active but {butoane_active_count} are active."))
-        # butoane_active_count == 3, f"Expected 1 button active but {butoane_active_count} are active."
 
     def check_author_relevance_products_received(self, text):
-        time.sleep(1)
         objects_with_author = []
         web_authors = self.driver.find_elements(*ProductsPageLocators.PRODUCTS_AUTHORS)
         for autor in web_authors:
             objects_with_author.append(autor.text.lower())
 
-        nr_produse_conform_textului = 0
+        nr_products_correctly_shown = 0
         for product in objects_with_author:
             if text in product:
-                nr_produse_conform_textului += 1
+                nr_products_correctly_shown += 1
             else:
                 pass
 
-        percentage = (nr_produse_conform_textului / len(objects_with_author)) * 100
-        assert percentage > 50, "Under 50% of products showed have other auhtor name."
+        percentage = (nr_products_correctly_shown / len(objects_with_author)) * 100
+        assert percentage > 50, "Less than 50% of the products shown have another author's name."
 
     def check_name_relevance_products_received(self, text):
-        time.sleep(1)
         objects_with_name = []
         web_names_products = self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES)
         for name in web_names_products:
             objects_with_name.append(name.text.lower())
 
-        nr_produse_conform_textului = 0
+        nr_products_correctly_shown = 0
         for product in objects_with_name:
             if text in product:
-                nr_produse_conform_textului += 1
+                nr_products_correctly_shown += 1
             else:
                 pass
 
-        percentage = (nr_produse_conform_textului / len(objects_with_name)) * 100
-        assert percentage > 50, "Under 50% of products showed have no text similarity in title/name."
+        percentage = (nr_products_correctly_shown / len(objects_with_name)) * 100
+        assert percentage > 50, "Less than 50% of the products shown have no text similarity in their title/name."
 
     def click_on_first_item(self):
-        time.sleep(0.5)
         items_on_page = self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES)
         item_to_add = items_on_page[1]
         item_to_add.click()
@@ -252,17 +248,16 @@ class ProductsPage(BasePage, softest.TestCase):
         time.sleep(1)
 
     def check_price_in_cart(self):
-        time.sleep(0.5)
         preturi_in_cart = []
         prices_elements = self.driver.find_elements(*ProductsPageLocators.PRICES_IN_CART)
         for price in prices_elements:
-            preturi_in_cart.append(price.text)
-        suma_preturi = 0
-        for pret in preturi_in_cart:
-            suma_preturi += float(pret.replace(',', '.'))
+            prices_in_cart.append(price.text)
+        sum_prices = 0
+        for price in prices_in_cart:
+            sum_prices += float(price.replace(',', '.'))
         final_price_in_cart = self.driver.find_element(*ProductsPageLocators.FINAL_PRICE).text
         final_price_in_cart_float = float(final_price_in_cart.replace(',', '.'))
-        assert float(suma_preturi) == final_price_in_cart_float, "Price wrongly displayed"
+        assert float(sum_prices) == final_price_in_cart_float, "Price incorrectly displayed"
 
     def go_to_checkout_page(self):
         btn_for_checkout = self.wait_for_clickable_element(ProductsPageLocators.BTN_GO_TO_CHECKOUT)

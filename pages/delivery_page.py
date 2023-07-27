@@ -3,22 +3,26 @@ import time
 from locators.delivery_page_locators import DeliveryPageLocators
 from Pages.base_page import BasePage
 
+from selenium.webdriver import ActionChains
 
 class DeliveryPage(BasePage):
 
 
     def click_on_persoana_fizica(self):
-        time.sleep(1)
+        time.sleep(0.5)
         self.driver.find_element(*DeliveryPageLocators.INDIVIDUAL_OPTION).click()
 
     def click_on_add_address(self):
+        time.sleep(1)
         self.driver.find_element(*DeliveryPageLocators.ADD_ADDRESS).click()
+        time.sleep(1)
+
     def go_to_payment_page(self):
-        try:
-            self.driver.find_element(*DeliveryPageLocators.TOWARDS_PAYMENT_BTN).click()
-            time.sleep(2)
-        except:
-            pass
+        # self.driver.find_element(*DeliveryPageLocators.TOWARDS_PAYMENT_BTN).click()
+        # time.sleep(2)
+        actions = ActionChains(self.driver)
+        actions.double_click(DeliveryPageLocators.TOWARDS_PAYMENT_BTN).perform()
+
     def send_wrong_inputs(self):
         self.driver.find_element(*DeliveryPageLocators.FIRST_NAME_INPUT).send_keys(' ')
         self.driver.find_element(*DeliveryPageLocators.LAST_NAME_INPUT).send_keys(' ')
@@ -51,12 +55,21 @@ class DeliveryPage(BasePage):
 
     def establish_transport_with_bike(self):
         try:
+            self.establish_fast_delivery_transport()
             self.driver.find_element(*DeliveryPageLocators.BYCICLE_TRANSPORT_OPTION).click()
         except:
             pass
 
-    def establish_free_trasnsport(self):
+    def establish_free_transport(self):
         try:
+            self.establish_fast_delivery_transport()
             self.driver.find_element(*DeliveryPageLocators.FREE_TRANSPORT_OPTION).click()
         except:
             pass
+
+    def establish_fast_delivery_transport(self):
+        try:
+            self.driver.find_element(*DeliveryPageLocators.FAST_DELIVERY_TRANSPORT_OPTION).click()
+        except:
+            pass
+

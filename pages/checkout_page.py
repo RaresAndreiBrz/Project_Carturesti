@@ -1,4 +1,5 @@
 import random
+import time
 
 from locators.checkout_page_locators import CheckoutPageLocators
 from Pages.base_page import BasePage
@@ -18,6 +19,7 @@ class CheckoutPage(BasePage):
 
     def go_to_delivery_page(self):
         self.driver.find_element(*CheckoutPageLocators.GO_TO_DELIVERY_PAGE_BTN).click()
+        time.sleep(1.5)
 
     def random_remove(self):
         remove_buttons = self.driver.find_elements(*CheckoutPageLocators.REMOVE_PRODUCTS_BUTTONS)

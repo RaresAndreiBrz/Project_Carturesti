@@ -86,7 +86,7 @@ class HomePage(BasePage):
 
     def check_error_of_missing_product(self):
         mssg_to_check = self.driver.find_element(*HomePageLocators.MESSAGE_ERROR_PRODUCT_NOT_FOUND)
-        assert mssg_to_check.is_displayed(), 'Error message of missing items doesn`t exist'
+        assert mssg_to_check.is_displayed(), 'The error message for missing items does not exist.'
 
     def click_on_my_account_btn(self):
         self.driver.find_element(*HomePageLocators.BTN_CONT_SALUT).click()
@@ -101,6 +101,7 @@ class HomePage(BasePage):
     def click_on_products_inventory(self):
         self.wait_for_clickable_element(HomePageLocators.BTN_PRODUCTS).click()
         time.sleep(0.5)
+
     def put_cursor_on_music_category(self):
         self.music_btn = self.wait_for_clickable_element(HomePageLocators.MUSIC_CATEGORY)
         self.actions = ActionChains(self.driver)
@@ -113,7 +114,7 @@ class HomePage(BasePage):
 
     def check_second_list_displayed(self):
         self.list_items = self.wait_for_displayed_element(HomePageLocators.BOX_OF_CATEGORY_LIST)
-        assert self.list_items.is_displayed(), "Items of music category not displayed"
+        assert self.list_items.is_displayed(), "Items of the music category not displayed"
 
     def go_to_assistance_page(self):
         self.wait_for_clickable_element(HomePageLocators.GO_TO_ASSISTANCE_PAGE).click()

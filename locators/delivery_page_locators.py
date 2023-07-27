@@ -4,7 +4,7 @@ class DeliveryPageLocators:
     ACASA_OPTION = (By.XPATH, '//*[@id="w3"]/li[1]/a/div')
     LIBRARIE_OPTION = (By.XPATH, '//*[@id="w3"]/li[2]/a/div')
     LOCKER_OPTION = (By.XPATH, '//*[@id="w3"]/li[3]/a/div')
-    TOWARDS_PAYMENT_BTN = (By.CSS_SELECTOR, '#shipping-form > div:nth-child(6) > div:nth-child(2) > button')
+    TOWARDS_PAYMENT_BTN = (By.XPATH, '//*[@id="shipping-form"]/div[4]/div[2]/button')
     INDIVIDUAL_OPTION = (By.XPATH, '//*[@id="checkoutaddressform-is_company"]/label[1]/span')
     COMPANY_OPTION = (By.XPATH, '//*[@id="checkoutaddressform-is_company"]/label[2]/span')
 

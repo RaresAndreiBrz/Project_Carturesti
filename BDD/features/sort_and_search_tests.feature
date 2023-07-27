@@ -1,52 +1,52 @@
-Feature: Tests of searching producs and sorting them
-  As a user
-  I want to search and sort products
-  So i can find easier what i am looking for
-
+#Feature: Tests of searching products and sorting them
+#  As a user
+#  I want to search and sort products
+#  So i can find easier what i am looking for
+#
 #  Scenario: Test for unavailable product
 #    Given I search an invalid text on site
-#    Then I should see that the product do not exist
+#    Then I should see that the product do not exists
 #
-#  Scenario: Test sorting price in ascending order
+#  Scenario: Test that sorts the price in ascending order
 #    Given I search a valid text on site
 #    When I click on sorting button
 #    And I select ascending order of price
 #    Then I should see the products sorted ascending correctly
 #
-#  Scenario: Test sorting price in descending order
+#  Scenario: Test that sorts the price in descending order
 #    Given I search a valid text on site
 #    When I click on sorting button
 #    And I select descending order of price
 #    Then I should see the products sorted descending correctly
 #
-#  Scenario: Test sorting products in stoc in alphabetical descending order
+#  Scenario: Test that sorts the products available in stock in alphabetical descending order
 #    Given I search a random text on site
 #    When I select in stoc products
 #    And I click on sorting button
 #    And I select descending alphabetical order
 #    Then I should see available products sorted alphabetical descending order correctly
 #
-#  Scenario: Test sorting products in stoc in alphabetical ascending order
+#  Scenario: Test that sorts the products available in stock alphabetical ascending order
 #    Given I search a random text on site
 #    When I select in stoc products
 #    And I click on sorting button
 #    And I select ascending alphabetical order
 #    Then I should see available products sorted alphabetical ascending order correctly
 #
-#  Scenario: Test sorting products by discount ascending order
+#  Scenario: Test that sorts the products available by discount in an ascending order
 #    Given I search another random text on site
 #    When I click on sorting button
 #    And I select ascending discount order
 #    Then I should see products sorted by discount ascending order correctly
 #
-#  Scenario: Test sorting products by discount descending order
+#  Scenario: Test that sorts the products available by discount in a descending order
 #    Given I search a random text on site
 #    When I select in stoc products
 #    And I click on sorting button
 #    And I select descending discount order
 #    Then I should see products sorted by discount descending order correctly
 #
-#  Scenario: Test number of setted elements on page
+#  Scenario: Test number of setted elements to be seen on page
 #    Given I search a specific text on site
 #    When I click on second sorting button
 #    And I random select a number of items to be shown

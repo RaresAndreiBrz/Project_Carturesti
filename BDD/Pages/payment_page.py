@@ -14,3 +14,4 @@ class PaymentPage(BasePage):
         time.sleep(2)
         btn = self.wait_for_clickable_element(PaymentPageLocators.CASH_BTN)
         btn.click()
+

@@ -20,5 +20,5 @@ class ItemPage(BasePage):
     def add_product_to_wishlist(self):
         time.sleep(0.2)
         self.driver.find_element(*ItemPageLocators.BTN_ADD_PRODUCT_IN_WISHLIST).click()
-        time.sleep(0.2)
+        time.sleep(0.5)
         self.driver.find_element(*ItemPageLocators.BTN_ADD_PRODUCT_IN_WISHLIST_2).click()

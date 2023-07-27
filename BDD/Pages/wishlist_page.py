@@ -16,3 +16,5 @@ class WishlistPage(BasePage):
         self.buttons_for_remove.click()
         time.sleep(2)
         self.driver.find_element(*WishlistPageLocators.REMOVE_CONFIRM).click()
+        time.sleep(2)
+
