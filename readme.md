@@ -60,7 +60,7 @@
    
 #### 4.Other Mentions   
 ### Target
-   The tested were done on 'https://carturesti.ro/' website.
+   The tests were done on 'https://carturesti.ro/' website.
 
 ### Risks
    This project is for learning only. Lack of experience, individual work, limited scalability and complexity of tests management 
@@ -74,7 +74,7 @@ orders, which I strongly recommend. Providing multiple choices to the client mak
 based on their current situation, even if those options are available or not.
 
 ---------------------------------------------------------
-### Tests used
+### Tests done
    
    1. Test that user can create an account
    2. Test the sign-in functionality by completing the login process with valid credentials.
