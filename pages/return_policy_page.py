@@ -1,5 +1,5 @@
 from locators.return_policy_page_locators import ReturnPolicyPageLocators
-from Pages.base_page import BasePage
+from pages.base_page import BasePage
 
 
 class ReturnPolicyPage(BasePage):

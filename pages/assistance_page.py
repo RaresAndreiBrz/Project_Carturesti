@@ -1,5 +1,5 @@
 from locators.assistance_page_locators import AssistancePageLocators
-from Pages.base_page import BasePage
+from pages.base_page import BasePage
 
 
 class AssistancePage(BasePage):

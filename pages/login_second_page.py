@@ -1,8 +1,7 @@
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-
 from locators.login_second_page_locs import LoginSecondPageLocators
-from Pages.base_page import BasePage
+from pages.base_page import BasePage
 
 
 class LoginSecondPage(BasePage):

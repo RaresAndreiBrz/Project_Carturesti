@@ -1,7 +1,6 @@
 import time
-
 from locators.wishlist_page_locators import WishlistPageLocators
-from Pages.base_page import BasePage
+from pages.base_page import BasePage
 
 
 class WishlistPage(BasePage):

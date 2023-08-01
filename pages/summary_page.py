@@ -1,5 +1,5 @@
 from locators.summary_page_locators import ConfirmationPageLocators
-from Pages.base_page import BasePage
+from pages.base_page import BasePage
 
 
 class SummaryPage(BasePage):
