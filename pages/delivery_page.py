@@ -49,7 +49,7 @@ class DeliveryPage(BasePage):
         self.driver.find_element(*DeliveryPageLocators.TOWN_DROP_INPUT).click()
         time.sleep(0.3)
         self.driver.find_element(*DeliveryPageLocators.TOWN_DROP_INPUT_SECTOR).click()
-        time.sleep(0.4)
+        time.sleep(0.3)
         try:
             self.driver.find_element(*DeliveryPageLocators.COUNTRY_DROP_INPUT).click()
             self.driver.find_element(*DeliveryPageLocators.COUNTRY_DROP_INPUT_ROMANIA).click()
