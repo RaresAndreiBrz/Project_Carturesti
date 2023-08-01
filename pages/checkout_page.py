@@ -2,7 +2,7 @@ import random
 import time
 
 from locators.checkout_page_locators import CheckoutPageLocators
-from Pages.base_page import BasePage
+from pages.base_page import BasePage
 
 
 class CheckoutPage(BasePage):

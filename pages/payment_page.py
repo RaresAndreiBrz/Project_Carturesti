@@ -1,8 +1,6 @@
 import time
-
 from locators.payment_page_locators import PaymentPageLocators
-from Pages.base_page import BasePage
-
+from pages.base_page import BasePage
 
 class PaymentPage(BasePage):
 

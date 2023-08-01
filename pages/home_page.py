@@ -1,9 +1,7 @@
 import time
-
 from selenium.webdriver import ActionChains
-
 from locators.home_page_locators import HomePageLocators
-from Pages.base_page import BasePage
+from pages.base_page import BasePage
 
 
 class HomePage(BasePage):

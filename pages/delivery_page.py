@@ -1,12 +1,8 @@
 import time
-
 from locators.delivery_page_locators import DeliveryPageLocators
-from Pages.base_page import BasePage
-
-from selenium.webdriver import ActionChains
+from pages.base_page import BasePage
 
 class DeliveryPage(BasePage):
-
 
     def click_on_persoana_fizica(self):
         time.sleep(0.5)
@@ -18,10 +14,18 @@ class DeliveryPage(BasePage):
         time.sleep(1)
 
     def go_to_payment_page(self):
-        # self.driver.find_element(*DeliveryPageLocators.TOWARDS_PAYMENT_BTN).click()
-        # time.sleep(2)
-        actions = ActionChains(self.driver)
-        actions.double_click(DeliveryPageLocators.TOWARDS_PAYMENT_BTN).perform()
+        i = 0
+        while i<10:
+            try:
+                self.establish_free_transport()
+                self.driver.find_element(*DeliveryPageLocators.TOWARDS_PAYMENT_BTN).click()
+            except:
+                self.establish_free_transport()
+                self.driver.find_element(*DeliveryPageLocators.TOWARDS_PAYMENT_BTN).click()
+            time.sleep(50)
+            if "billing" in self.driver.current_url:
+                break
+            i+=1
 
     def send_wrong_inputs(self):
         self.driver.find_element(*DeliveryPageLocators.FIRST_NAME_INPUT).send_keys(' ')
@@ -61,13 +65,16 @@ class DeliveryPage(BasePage):
             pass
 
     def establish_free_transport(self):
-        try:
-            self.establish_fast_delivery_transport()
-            self.driver.find_element(*DeliveryPageLocators.FREE_TRANSPORT_OPTION).click()
-        except:
-            pass
+        # self.establish_fast_delivery_transport()
+        self.driver.find_element(*DeliveryPageLocators.FREE_TRANSPORT_OPTION).click()
+        # try:
+        #     self.establish_fast_delivery_transport()
+        #     self.driver.find_element(*DeliveryPageLocators.FREE_TRANSPORT_OPTION).click()
+        # except:
+        #     pass
 
     def establish_fast_delivery_transport(self):
+        self.driver.find_element(*DeliveryPageLocators.FAST_DELIVERY_TRANSPORT_OPTION).click()
         try:
             self.driver.find_element(*DeliveryPageLocators.FAST_DELIVERY_TRANSPORT_OPTION).click()
         except:

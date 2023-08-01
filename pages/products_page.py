@@ -1,13 +1,13 @@
 import time
 import random
-
 from selenium.webdriver.common.by import By
-
 from locators.home_page_locators import HomePageLocators
 from locators.item_page_locators import ItemPageLocators
 from locators.products_page_locators import ProductsPageLocators
-from Pages.base_page import BasePage
 import softest
+
+from pages.base_page import BasePage
+
 
 class ProductsPage(BasePage, softest.TestCase):
 
@@ -234,6 +234,7 @@ class ProductsPage(BasePage, softest.TestCase):
         assert percentage > 50, "Less than 50% of the products shown have no text similarity in their title/name."
 
     def click_on_first_item(self):
+        time.sleep(3)
         items_on_page = self.driver.find_elements(*ProductsPageLocators.PRODUCTS_NAMES)
         item_to_add = items_on_page[1]
         item_to_add.click()

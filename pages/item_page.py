@@ -1,13 +1,11 @@
 import time
-
 from locators.item_page_locators import ItemPageLocators
-from Pages.base_page import BasePage
-
+from pages.base_page import BasePage
 
 class ItemPage(BasePage):
 
     def go_back(self):
-        self.back()
+        self.driver.back()
 
     def multiply_clicks_on_add(self, multiplier):
         for click in range(multiplier):
